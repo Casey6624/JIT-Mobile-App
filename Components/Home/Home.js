@@ -1,10 +1,17 @@
+// Libaries
 import React, {Component} from 'react';
 import { StyleSheet, Text,  View, Image} from 'react-native';
 import { TabNavigator, TabBarBottom, createBottomTabNavigator } from "react-navigation";
+// Utils 
 import Icon from "react-native-vector-icons/Ionicons";
 import Fonts from "../../utils/fonts";
+// Assets
 import JollyRobot from "../../assets/img/JollyRobotCirc.png";
+// Screens
 import NewsScreen from "../News/News";
+import AboutScreen from "../About/About";
+
+
 
 class SettingsScreen extends Component {
 
@@ -17,24 +24,13 @@ class SettingsScreen extends Component {
   }
 }
 
-class AboutScreen extends Component {
-
-    render() {
-      return (
-          <View style={styles.container}>
-            <Text> About Page! </Text>
-          </View>
-      );
-    }
-  }
-
   class HomeScreen extends Component {
 
     render() {
       return (
           <View style={styles.container}>
             <Text style={styles.homeTitle}> HOME | <Text style={styles.headerAccent}>JOLLY  IT</Text></Text>
-            <Text style={styles.welcomeText}>Welcome To The Official Jolly IT mobile app! </Text>
+            <Text style={styles.welcomeText}>SHEFFIELD | LONDON</Text>
             <Image 
             source={JollyRobot} 
             resizeMode="contain"
@@ -98,9 +94,12 @@ const styles = StyleSheet.create({
         fontFamily: Fonts.RalewayBold
     },
     JollyRobot: {
-        width: 250,
+        width: 270,
         marginTop: 0,
-        marginLeft: 20
+        marginLeft: 20,
+        transform: [
+            { rotate: '40deg'}
+          ]
     },
     headerAccent: {
         color: "#ef7d00"
@@ -115,9 +114,8 @@ const styles = StyleSheet.create({
     },
     getStarted: {
         color: "white",
-        fontSize: 16,
-        fontWeight: "400",
+        fontSize: 22,
         textAlign: "center",
-        fontFamily: Fonts.RalewaySemiBold
+        fontFamily: Fonts.RalewayLight
     }
 })
