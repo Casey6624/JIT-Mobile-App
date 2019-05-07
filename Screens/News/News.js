@@ -15,11 +15,10 @@ export default class NewsScreen extends Component {
     }
 
     getPosts = () => {
-        let queryURL = "https://www.jollyit.co.uk/wp-json/wp/v2/posts"
+        let queryURL = "https://www.jollyit.co.uk/wp-json/wp/v2/posts?_embed"
         axios.get(queryURL)
             .then(res => {
                 this.setState({ blogData: res.data })
-                console.log(this.state.blogData)
             })
             .catch(err => {
                 console.log(err)
@@ -39,6 +38,10 @@ export default class NewsScreen extends Component {
                 {this.state.blogData.map((blog, index) =>
                     <View key={blog.id}>
                         <Text style={styles.blogTitle}>{blog.title.rendered}</Text>
+                        <Image
+                            style={{ width: 150, height: 150 }}
+                            source={{ uri: blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail.source_url }}
+                        />
                         <TouchableOpacity style={styles.viewMoreBtn} onPress={() => Linking.openURL(blog.link)}>
                             <Text style={styles.viewMoreBtnTxt}> View Full </Text>
                         </TouchableOpacity>
@@ -82,5 +85,10 @@ const styles = StyleSheet.create({
     },
     headerAccent: {
         color: "#ef7d00"
+    },
+    loadingBlogs: {
+        color: "white",
+        textAlign: "center",
+        fontSize: 50
     }
 })
