@@ -1,6 +1,6 @@
 export default Fonts = {
-    Raleway: "Raleway-Regular",
-    RalewayBold: "Raleway-Bold",
-    RalewaySemiBold: "Raleway-SemiBold",
-    RalewayLight: "Raleway-Light"
+    Roboto: "RobotoCondensed-Regular",
+    RobotoBold: "RobotoCondensed-Bold",
+    RobotoItalic: "RobotoCondensed-Italic",
+    RobotoLight: "RobotoCondensed-Light"
 }

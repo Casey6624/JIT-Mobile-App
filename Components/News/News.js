@@ -1,44 +1,54 @@
 import React, { Component } from "react";
-import {View, Text, StyleSheet, WebView} from "react-native";
+import { View, Text, StyleSheet, Image, WebView } from "react-native";
 
+import axios from "axios"
 
 export default class NewsScreen extends Component {
 
-    state = { 
-        pullingBlogsInProgress: true
+    state = {
+        pullingBlogsInProgress: true,
+        blogData: []
     }
-    render() {
-        if(this.state.pullingBlogsInProgress){
-                return(
-                    <View>
-                        <Text>Loading...</Text>
-                    </View>
-                )
-        }
-      return (
-          <View style={styles.container}>
-              <Text style={styles.newsTitle}> NEWS | <Text style={styles.headerAccent}>JOLLY  IT</Text></Text>
-            <WebView 
-            style={styles.pulledBlogs}
-            javaScriptEnabled={true}
-            domStorageEnabled={true}
-            source={{uri: "https://www.jollyit.co.uk/blog"}}
-            onLoad={this.blogsLoaded()}
-            injectedJavaScript={`
-            document.getElementsByClassName("container clearfix et_menu_container")[0].style.display = "none";
-            document.getElementsByClassName("et_pb_module et_pb_text et_pb_text_2 et_pb_bg_layout_light  et_pb_text_align_left")[0].style.display = "none";
-            document.getElementsByClassName("et_pb_row et_pb_row_1")[0].style.display = "none";
-            document.getElementsByClassName("et_pb_row et_pb_row_2 tiled-blog-row")[0].style.padding = "0px";
-            document.getElementById("page-container").style.padding = "0px";
-            document.getElementsByClassName("et_pb_section et_pb_section_0 et_pb_with_background et_section_regular")[0].style.display = "none";`
-        }
-            />
-          </View>
-      );
-    }
-  }
 
-  const styles = StyleSheet.create({
+    componentDidMount() {
+        this.getPosts();
+    }
+
+    getPosts = () => {
+        let queryURL = "https://www.jollyit.co.uk/wp-json/wp/v2/posts"
+        axios.get(queryURL)
+            .then(res => {
+                this.setState({ blogData: res.data })
+                console.log(this.state.blogData)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    render() {
+        if (this.state.pullingBlogsInProgress) {
+            <View>
+                <Text style={styles.loadingBlogs}>Loading...</Text>
+            </View>
+        }
+
+        return (
+            <View style={styles.container}>
+                <Text style={styles.newsTitle}> NEWS | <Text style={styles.headerAccent}>JOLLY  IT</Text></Text>
+                {this.state.blogData.map((blog, index) =>
+
+                    <View>
+                        <Text style={styles.blogTitle}>{this.state.blogData[index].title.rendered}</Text>
+                        <Image></Image>
+                    </View>
+                )}
+            </View>
+        );
+    }
+}
+
+const styles = StyleSheet.create({
     container: {
         backgroundColor: "#2A2F33",
         flex: 1
@@ -48,14 +58,14 @@ export default class NewsScreen extends Component {
         fontSize: 35,
         marginTop: 10,
         textAlign: "center",
-        fontFamily: Fonts.RalewayBold,
+        fontFamily: Fonts.RobotoLight,
         paddingBottom: 5
+    },
+    blogTitle: {
+        color: "white",
+        fontSize: 22
     },
     headerAccent: {
         color: "#ef7d00"
-    },
-    pulledBlogs: {
-        
     }
 })
-  

@@ -12,6 +12,7 @@ export default class AboutScreen extends Component {
             A single point of contact for many businesses who don’t have the time, resources or desire to bring those skills inhouse.
             </Text>
             <WebView 
+            style={styles.videoPlayer}
             javaScriptEnabled={true}
             onLoadStart={this.loadSpinner}
             source={{uri: "https://www.youtube.com/embed/vpKcugzudTs"}}

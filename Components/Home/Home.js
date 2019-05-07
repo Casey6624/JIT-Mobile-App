@@ -1,6 +1,6 @@
 // Libaries
-import React, {Component} from 'react';
-import { StyleSheet, Text,  View, Image} from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { TabNavigator, TabBarBottom, createBottomTabNavigator } from "react-navigation";
 // Utils 
 import Icon from "react-native-vector-icons/Ionicons";
@@ -15,32 +15,32 @@ import AboutScreen from "../About/About";
 
 class SettingsScreen extends Component {
 
-  render() {
-    return (
-        <View style={styles.container}>
-          <Text> Settings Page! </Text>
-        </View>
-    );
-  }
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text> Settings Page! </Text>
+            </View>
+        );
+    }
 }
 
-  class HomeScreen extends Component {
+class HomeScreen extends Component {
 
     render() {
-      return (
-          <View style={styles.container}>
-            <Text style={styles.homeTitle}> HOME | <Text style={styles.headerAccent}>JOLLY  IT</Text></Text>
-            <Text style={styles.welcomeText}>SHEFFIELD | LONDON</Text>
-            <Image 
-            source={JollyRobot} 
-            resizeMode="contain"
-            style={styles.JollyRobot}
-            />
-            <Text style={styles.getStarted}>Get Started By Selecting a menu item below.</Text>
-          </View>
-      );
+        return (
+            <View style={styles.container}>
+                <Text style={styles.homeTitle}> HOME | <Text style={styles.headerAccent}>JOLLY  IT</Text></Text>
+                <Text style={styles.welcomeText}>SHEFFIELD | LONDON</Text>
+                <Image
+                    source={JollyRobot}
+                    resizeMode="contain"
+                    style={styles.JollyRobot}
+                />
+                <Text style={styles.getStarted}><Text style={styles.headerAccent}>Get Started</Text> by selecting a menu item below</Text>
+            </View>
+        );
     }
-  }
+}
 
 export default createBottomTabNavigator({
     Home: {
@@ -49,7 +49,7 @@ export default createBottomTabNavigator({
             tabBarLabel: "Home",
             tabBarIcon: () => (
                 <Icon name="ios-home" size={24} />
-            )        
+            )
         }
     },
     News: {
@@ -91,15 +91,15 @@ const styles = StyleSheet.create({
         fontSize: 35,
         marginTop: 10,
         textAlign: "center",
-        fontFamily: Fonts.RalewayBold
+        fontFamily: Fonts.RobotoLight
     },
     JollyRobot: {
         width: 270,
         marginTop: 0,
         marginLeft: 20,
         transform: [
-            { rotate: '40deg'}
-          ]
+            { rotate: '40deg' }
+        ]
     },
     headerAccent: {
         color: "#ef7d00"
