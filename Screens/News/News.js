@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, Linking, ScrollView } from "react-native";
 
+import Icon from "react-native-vector-icons/Ionicons";
+
 import axios from "axios"
 
 export default class NewsScreen extends Component {
@@ -50,11 +52,24 @@ export default class NewsScreen extends Component {
                     {this.state.blogData.map((blog, index) =>
                         <View key={blog.id} style={styles.blog}>
                             <Text style={styles.blogTitle}>{blog.title.rendered}</Text>
-                            <Image
-                                style={{ width: 150, height: 150, borderRadius: 5 }}
-                                source={{ uri: blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail.source_url }}
-                            />
-                            <Text>
+                            <View style={styles.imgAndExcerpt}>
+                                <Image
+                                    style={{ width: 150, height: 150, borderRadius: 5 }}
+                                    source={{ uri: blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail.source_url }}
+                                />
+                                <View style={styles.dateAndUserContainer}>
+
+                                    <Text style={styles.dateAndUserTxt}>
+                                        <Icon name="md-time" size={20} style={styles.blogIcons} />
+                                        &nbsp; 23rd March 2019
+                                     </Text>
+                                    <Text style={styles.dateAndUserTxt}>
+                                        <Icon name="md-person" size={20} style={styles.blogIcons} />
+                                        &nbsp; Casey
+                                </Text>
+                                </View>
+                            </View>
+                            <Text style={styles.excerpt}>
                                 {this.stripHTML(blog.excerpt.rendered)}
                             </Text>
                             <TouchableOpacity style={styles.viewMoreBtn} onPress={() => Linking.openURL(blog.link)}>
@@ -77,7 +92,24 @@ const styles = StyleSheet.create({
         padding: 10
     },
     blog: {
-        padding: 5
+        padding: 5,
+        marginBottom: 5,
+        borderBottomWidth: 2,
+        borderBottomColor: "white"
+    },
+    dateAndUserContainer: {
+        margin: 20
+    },
+    dateAndUserTxt: { margin: 5, color: "white", fontSize: 20 },
+    blogIcons: { marginRight: 10, color: "#ef7d00" },
+    imgAndExcerpt: {
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    excerpt: {
+        color: "white",
+        fontSize: 15,
+        paddingTop: 10
     },
     viewMoreBtn: {
         backgroundColor: "#ef7d00",
