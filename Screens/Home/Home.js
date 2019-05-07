@@ -11,8 +11,6 @@ import JollyRobot from "../../assets/img/JollyRobotCirc.png";
 import NewsScreen from "../News/News";
 import AboutScreen from "../About/About";
 
-
-
 class SettingsScreen extends Component {
 
     render() {

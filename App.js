@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 
-import WelcomeScreen from "./Components/Welcome/Welcome";
-import HomeScreen from "./Components/Home/Home";
+import WelcomeScreen from "./Screens/Welcome/Welcome";
+import HomeScreen from "./Screens/Home/Home";
 
 import { createStackNavigator } from "react-navigation";
 

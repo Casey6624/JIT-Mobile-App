@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, WebView } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, Linking, ScrollView } from "react-native";
 
 import axios from "axios"
 
@@ -34,16 +34,17 @@ export default class NewsScreen extends Component {
         }
 
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <Text style={styles.newsTitle}> NEWS | <Text style={styles.headerAccent}>JOLLY  IT</Text></Text>
                 {this.state.blogData.map((blog, index) =>
-
-                    <View>
-                        <Text style={styles.blogTitle}>{this.state.blogData[index].title.rendered}</Text>
-                        <Image></Image>
+                    <View key={blog.id}>
+                        <Text style={styles.blogTitle}>{blog.title.rendered}</Text>
+                        <TouchableOpacity style={styles.viewMoreBtn} onPress={() => Linking.openURL(blog.link)}>
+                            <Text style={styles.viewMoreBtnTxt}> View Full </Text>
+                        </TouchableOpacity>
                     </View>
                 )}
-            </View>
+            </ScrollView>
         );
     }
 }
@@ -51,7 +52,21 @@ export default class NewsScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#2A2F33",
-        flex: 1
+        flex: 1,
+    },
+    viewMoreBtn: {
+        backgroundColor: "#ef7d00",
+        borderRadius: 5,
+        padding: 5,
+        width: 150,
+        height: 50,
+        textAlign: "center"
+    },
+    viewMoreBtnTxt: {
+        textAlign: "center",
+        color: "white",
+        fontSize: 18,
+        fontFamily: Fonts.RobotoBold,
     },
     newsTitle: {
         color: "white",
