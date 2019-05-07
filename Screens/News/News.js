@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Linking, ScrollView } 
 import Icon from "react-native-vector-icons/Ionicons";
 
 import axios from "axios"
+import moment from "moment"
 
 export default class NewsScreen extends Component {
 
@@ -61,12 +62,12 @@ export default class NewsScreen extends Component {
 
                                     <Text style={styles.dateAndUserTxt}>
                                         <Icon name="md-time" size={20} style={styles.blogIcons} />
-                                        &nbsp; 23rd March 2019
-                                     </Text>
+                                        &nbsp; {moment(blog.date_gmt).format('LL')}
+                                    </Text>
                                     <Text style={styles.dateAndUserTxt}>
                                         <Icon name="md-person" size={20} style={styles.blogIcons} />
-                                        &nbsp; Casey
-                                </Text>
+                                        &nbsp; {blog._embedded.author[0].name}
+                                    </Text>
                                 </View>
                             </View>
                             <Text style={styles.excerpt}>
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
     },
     excerpt: {
         color: "white",
-        fontSize: 15,
+        fontSize: 18,
         paddingTop: 10
     },
     viewMoreBtn: {
