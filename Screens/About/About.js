@@ -1,37 +1,29 @@
 import React, { Component } from "react";
-import { View, Text, Image, StyleSheet, WebView } from "react-native";
+import { View, Text, Image, StyleSheet, ImageBackground } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import BigBen from "../../assets/img/london.jpg"
+
 
 export default class AboutScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <ImageBackground style={styles.container} source={BigBen}>
                 <View style={styles.headerText}>
                     <Text style={styles.welcomeText}>ABOUT</Text>
-                    <Icon name="ios-people" size={35} style={{ color: "#ef7d00" }} />
+                    <Icon name="ios-people" size={35} style={{ color: "#2A2F33" }} />
                 </View>
                 <Text style={styles.bio}>
                     We are a group of friendly IT professionals who have decades of experience in providing a services to companies large and small
                     A single point of contact for many businesses who don’t have the time, resources or desire to bring those skills inhouse.
             </Text>
-                <WebView
+                {/*                 <WebView
                     style={styles.videoPlayer}
-                    javaScriptEnabled={true}
-                    onLoadStart={this.loadSpinner}
                     source={{ uri: "https://www.youtube.com/embed/vpKcugzudTs" }}
-                />
-            </View>
+                /> */}
+            </ImageBackground>
         );
     }
-}
-
-loadSpinner = () => {
-    return (
-        <View>
-            <Text>Loading...</Text>
-        </View>
-    )
 }
 
 const styles = StyleSheet.create({
@@ -43,7 +35,7 @@ const styles = StyleSheet.create({
         color: "#ef7d00"
     },
     headerText: {
-        backgroundColor: "#2A2F33",
+        backgroundColor: "#ef7d00",
         padding: 10,
         flexDirection: "row",
         alignItems: "center",

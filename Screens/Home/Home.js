@@ -21,7 +21,7 @@ class HomeScreen extends Component {
             <ImageBackground style={styles.container} source={SheffieldTrain}>
                 <View style={styles.headerText}>
                     <Text style={styles.welcomeText}>HOME</Text>
-                    <Icon name="ios-home" size={35} style={{ color: "#ef7d00" }} />
+                    <Icon name="ios-home" size={35} style={{ color: "#2A2F33" }} />
                 </View>
                 <View style={styles.contentContainer}
                 >
@@ -32,15 +32,15 @@ class HomeScreen extends Component {
                         padding: 5,
                         fontFamily: Fonts.OpenSansCon
                     }}>
-                        ...a family run IT consultancy based in London 💂 and Yorkshire ☕.
+                        ...a family run IT consultancy based in London 💂 + Yorkshire ☕.
                         </Text>
                     <View style={styles.btnContainer}>
-                        <TouchableOpacity style={styles.tchButton}>
+                        <TouchableOpacity style={styles.tchButton} onPress={() => this.props.navigation.navigate("News")}>
                             <Text style={{
                                 color: "white",
                                 fontSize: 20
                             }}>
-                                What have We Been Up To?
+                                Extra! Extra! Read all about it
                         </Text>
                         </TouchableOpacity>
                     </View>
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         margin: 25
     },
     headerText: {
-        backgroundColor: "#2A2F33",
+        backgroundColor: "#ef7d00",
         padding: 10,
         flexDirection: "row",
         alignItems: "center",

@@ -50,7 +50,7 @@ export default class NewsScreen extends Component {
             <ScrollView style={styles.container}>
                 <View style={styles.headerText}>
                     <Text style={styles.welcomeText}>NEWS</Text>
-                    <Icon name="ios-paper" size={35} style={{ color: "#ef7d00" }} />
+                    <Icon name="ios-paper" size={35} style={{ color: "#2A2F33" }} />
                 </View>
                 <View style={styles.innerContainer}>
                     {this.state.blogData.map((blog, index) =>
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         padding: 10
     },
     headerText: {
-        backgroundColor: "#2A2F33",
+        backgroundColor: "#ef7d00",
         padding: 10,
         flexDirection: "row",
         alignItems: "center",
