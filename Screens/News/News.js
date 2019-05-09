@@ -48,7 +48,10 @@ export default class NewsScreen extends Component {
 
         return (
             <ScrollView style={styles.container}>
-                <Text style={styles.newsTitle}> NEWS | <Text style={styles.headerAccent}>JOLLY  IT</Text></Text>
+                <View style={styles.headerText}>
+                    <Text style={styles.welcomeText}>NEWS</Text>
+                    <Icon name="ios-paper" size={35} style={{ color: "#ef7d00" }} />
+                </View>
                 <View style={styles.innerContainer}>
                     {this.state.blogData.map((blog, index) =>
                         <View key={blog.id} style={styles.blog}>
@@ -75,7 +78,7 @@ export default class NewsScreen extends Component {
                                 {this.stripHTML(blog.excerpt.rendered)}
                             </Text>
                             <TouchableOpacity style={styles.viewMoreBtn} onPress={() => Linking.openURL(blog.link)}>
-                                <Text style={styles.viewMoreBtnTxt}> View Full Post</Text>
+                                <Text style={styles.viewMoreBtnTxt}> View Full Post Online</Text>
                             </TouchableOpacity>
                         </View>
                     )}
@@ -92,6 +95,21 @@ const styles = StyleSheet.create({
     },
     innerContainer: {
         padding: 10
+    },
+    headerText: {
+        backgroundColor: "#2A2F33",
+        padding: 10,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between"
+    },
+    welcomeText: {
+        color: "white",
+        fontSize: 28,
+        fontWeight: "bold",
+        margin: 15,
+        fontFamily: Fonts.OpenSansConBold,
+        fontWeight: "400"
     },
     blog: {
         padding: 5,

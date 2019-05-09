@@ -1,48 +1,51 @@
 // Libaries
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Animated, ImageBackground, TouchableOpacity } from 'react-native';
 import { TabNavigator, TabBarBottom, createBottomTabNavigator } from "react-navigation";
 // Utils 
 import Icon from "react-native-vector-icons/Ionicons";
+import LogoImage from "../../assets/img/whitelogotrans.png";
 import Fonts from "../../utils/fonts";
 // Assets
+import SheffieldTrain from "../../assets/img/sheffieldTrain.jpg"
 import JollyRobot from "../../assets/img/JollyRobotCirc.png";
 // Screens
 import NewsScreen from "../News/News";
+import SettingsScreen from "../Settings/Settings"
 import AboutScreen from "../About/About";
-
-class SettingsScreen extends Component {
-
-    static navigationOptions = {
-        headerMode: 'none',
-        header: null
-    }
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text> Settings Page! </Text>
-            </View>
-        );
-    }
-}
 
 class HomeScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <ImageBackground style={styles.container} source={SheffieldTrain}>
                 <View style={styles.headerText}>
-                    <Text style={styles.headerAccent}>JOLLY  IT</Text>
-                    <Text style={styles.welcomeText}>SHEFFIELD | LONDON</Text>
+                    <Text style={styles.welcomeText}>HOME</Text>
+                    <Icon name="ios-home" size={35} style={{ color: "#ef7d00" }} />
                 </View>
-                <Image
-                    source={JollyRobot}
-                    resizeMode="contain"
-                    style={styles.JollyRobot}
-                />
-                <Text style={styles.getStarted}><Text style={styles.headerAccent}>Get Started</Text> by selecting a menu item below</Text>
-            </View>
+                <View style={styles.contentContainer}
+                >
+                    <Text style={{
+                        fontSize: 38,
+                        color: "white",
+                        backgroundColor: "#2A2F33",
+                        padding: 5,
+                        fontFamily: Fonts.OpenSansCon
+                    }}>
+                        ...a family run IT consultancy based in London 💂 and Yorkshire ☕.
+                        </Text>
+                    <View style={styles.btnContainer}>
+                        <TouchableOpacity style={styles.tchButton}>
+                            <Text style={{
+                                color: "white",
+                                fontSize: 20
+                            }}>
+                                What have We Been Up To?
+                        </Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </ImageBackground>
         );
     }
 }
@@ -54,13 +57,7 @@ export default createBottomTabNavigator({
             tabBarLabel: "Home",
             tabBarIcon: () => (
                 <Icon name="ios-home" size={24} />
-            ),
-            header: null,
-            headerLeft: null,
-            headerMode: "screen",
-            header: {
-                visible: false
-            }
+            )
         }
     },
     News: {
@@ -69,9 +66,7 @@ export default createBottomTabNavigator({
             tabBarLabel: "News",
             tabBarIcon: () => (
                 <Icon name="ios-paper" size={24} />
-            ),
-            header: null,
-            headerLeft: null
+            )
         }
     },
     About: {
@@ -80,9 +75,7 @@ export default createBottomTabNavigator({
             tabBarLabel: "About Us",
             tabBarIcon: () => (
                 <Icon name="ios-people" size={28} />
-            ),
-            header: null,
-            headerLeft: null
+            )
         }
     },
     Settings: {
@@ -103,13 +96,15 @@ const styles = StyleSheet.create({
         backgroundColor: "#ef7d00",
         flex: 1
     },
+    contentContainer: {
+        margin: 25
+    },
     headerText: {
-        backgroundColor: "black",
+        backgroundColor: "#2A2F33",
         padding: 10,
-        borderBottomLeftRadius: -30,
-        borderBottomRightRadius: 15,
-        borderBottomWidth: 2,
-        borderBottomColor: "#ef7d00"
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between"
     },
     homeTitle: {
         color: "white",
@@ -129,18 +124,25 @@ const styles = StyleSheet.create({
     headerAccent: {
         color: "black"
     },
+    tchButton: {
+        alignItems: "center",
+        backgroundColor: '#ef7d00',
+        padding: 12,
+        borderRadius: 5,
+        width: 200
+    },
+    btnContainer: {
+        flexDirection: "row",
+        justifyContent: "flex-end",
+        margin: 15,
+        alignItems: "flex-end"
+    },
     welcomeText: {
         color: "white",
-        fontSize: 18,
-        textAlign: "center",
-        marginTop: 0,
-        fontFamily: Fonts.RalewaySemiBold,
+        fontSize: 28,
+        fontWeight: "bold",
+        margin: 15,
+        fontFamily: Fonts.OpenSansConBold,
         fontWeight: "400"
-    },
-    getStarted: {
-        color: "white",
-        fontSize: 22,
-        textAlign: "center",
-        fontFamily: Fonts.RalewayLight
     }
 })

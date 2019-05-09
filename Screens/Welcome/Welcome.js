@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { StackActions, NavigationActions } from 'react-navigation';
-import { StyleSheet, Button, Text, TouchableOpacity, View, Image, Animated } from 'react-native';
+import { StyleSheet, Button, Text, TouchableOpacity, View, Image, Animated, ImageBackground } from 'react-native';
 import LogoImage from "../../assets/img/whitelogotrans.png";
+import SheffieldTrain from "../../assets/img/sheffieldTrain.jpg"
+import Fonts from "../../utils/fonts";
 
 export default class WelcomeScreen extends Component {
 
@@ -19,27 +21,21 @@ export default class WelcomeScreen extends Component {
       });
 
       this.props.navigation.dispatch(resetAction);
-    }, 300);
+    }, 1000);
   }
 
   render() {
 
 
     return (
-      <View style={styles.container}>
+      <ImageBackground style={styles.container} source={SheffieldTrain}>
         <Animated.Image
           resizeMode="contain"
           style={styles.LogoImageBanner}
           source={LogoImage}
         />
-        {/* <TouchableOpacity
-          style={styles.tchButton}
-          onPress={() => this.props.navigation.navigate("Home")}
-        >
-          <Text style={styles.tapToEnter} >Tap To Enter </Text>
-        </TouchableOpacity> */}
-
-      </View>
+        <Text style={styles.getStarted}>SHEFFIELD // LONDON</Text>
+      </ImageBackground>
     );
   }
 }
@@ -47,7 +43,6 @@ export default class WelcomeScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#2A2F33",
     justifyContent: "center",
     alignItems: "center"
   },
@@ -64,11 +59,13 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: "center"
   },
-  tchButton: {
-    alignItems: "center",
-    backgroundColor: '#ef7d00',
-    padding: 12,
-    borderRadius: 5
+  getStarted: {
+    color: "white",
+    backgroundColor: "#ef7d00",
+    fontSize: 26,
+    textAlign: "center",
+    fontFamily: Fonts.OpenSansConBold,
+    padding: 5
   }
 
 });
