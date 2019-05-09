@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, Animated, ImageBackground, TouchableOpacity } from 'react-native';
 import { TabNavigator, TabBarBottom, createBottomTabNavigator } from "react-navigation";
+import axios from "axios"
 // Utils 
 import Icon from "react-native-vector-icons/Ionicons";
 import LogoImage from "../../assets/img/whitelogotrans.png";
@@ -15,6 +16,28 @@ import SettingsScreen from "../Settings/Settings"
 import AboutScreen from "../About/About";
 
 class HomeScreen extends Component {
+
+    state = {
+        numOfCustomers: null,
+        noData: false
+    }
+
+    componentDidMount() {
+        const url = "http://tasks.jollyit.co.uk/php/LMI/totalSessions.php"
+        axios.get(url)
+            .then(res => {
+                if (res.status === 200 && !isNaN(res.data)) {
+                    return this.setState({ numOfCustomers: res.data })
+                }
+
+            })
+            .catch(err => {
+                console.log(err)
+                this.setState({ noData: true })
+            })
+    }
+
+
 
     render() {
         return (
@@ -34,15 +57,12 @@ class HomeScreen extends Component {
                     }}>
                         ...a family run IT consultancy based in London 💂 + Yorkshire ☕.
                         </Text>
-                    <View style={styles.btnContainer}>
-                        <TouchableOpacity style={styles.tchButton} onPress={() => this.props.navigation.navigate("News")}>
-                            <Text style={{
-                                color: "white",
-                                fontSize: 20
-                            }}>
-                                Extra! Extra! Read all about it
+                    <View style={styles.lmiContainer}>
+                        <Text style={styles.LMIText}>
+                            Currently Helping
+                            <Text style={{ color: "#ef7d00" }}> {this.state.numOfCustomers} </Text>
+                            Customers
                         </Text>
-                        </TouchableOpacity>
                     </View>
                 </View>
             </ImageBackground>
@@ -131,11 +151,13 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         width: 200
     },
-    btnContainer: {
+    lmiContainer: {
         flexDirection: "row",
+        marginTop: 40,
+        textAlign: "right",
+        backgroundColor: "#2A2F33",
         justifyContent: "flex-end",
-        margin: 15,
-        alignItems: "flex-end"
+        //display: this.state.numOfCustomers === null || this.state.numOfCustomers === 0 ? "none" : "flex"
     },
     welcomeText: {
         color: "white",
@@ -144,5 +166,10 @@ const styles = StyleSheet.create({
         margin: 15,
         fontFamily: Fonts.OpenSansConBold,
         fontWeight: "400"
+    },
+    LMIText: {
+        color: "white",
+        fontSize: 22,
+        textAlign: "right"
     }
 })
