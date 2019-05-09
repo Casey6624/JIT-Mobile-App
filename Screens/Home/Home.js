@@ -13,6 +13,11 @@ import AboutScreen from "../About/About";
 
 class SettingsScreen extends Component {
 
+    static navigationOptions = {
+        headerMode: 'none',
+        header: null
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -27,8 +32,10 @@ class HomeScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.homeTitle}> HOME | <Text style={styles.headerAccent}>JOLLY  IT</Text></Text>
-                <Text style={styles.welcomeText}>SHEFFIELD | LONDON</Text>
+                <View style={styles.headerText}>
+                    <Text style={styles.headerAccent}>JOLLY  IT</Text>
+                    <Text style={styles.welcomeText}>SHEFFIELD | LONDON</Text>
+                </View>
                 <Image
                     source={JollyRobot}
                     resizeMode="contain"
@@ -47,7 +54,13 @@ export default createBottomTabNavigator({
             tabBarLabel: "Home",
             tabBarIcon: () => (
                 <Icon name="ios-home" size={24} />
-            )
+            ),
+            header: null,
+            headerLeft: null,
+            headerMode: "screen",
+            header: {
+                visible: false
+            }
         }
     },
     News: {
@@ -56,7 +69,9 @@ export default createBottomTabNavigator({
             tabBarLabel: "News",
             tabBarIcon: () => (
                 <Icon name="ios-paper" size={24} />
-            )
+            ),
+            header: null,
+            headerLeft: null
         }
     },
     About: {
@@ -65,7 +80,9 @@ export default createBottomTabNavigator({
             tabBarLabel: "About Us",
             tabBarIcon: () => (
                 <Icon name="ios-people" size={28} />
-            )
+            ),
+            header: null,
+            headerLeft: null
         }
     },
     Settings: {
@@ -74,15 +91,25 @@ export default createBottomTabNavigator({
             tabBarLabel: "Settings",
             tabBarIcon: () => (
                 <Icon name="ios-hammer" size={24} />
-            )
+            ),
+            header: null,
+            headerLeft: null
         }
     }
 })
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#2A2F33",
+        backgroundColor: "#ef7d00",
         flex: 1
+    },
+    headerText: {
+        backgroundColor: "black",
+        padding: 10,
+        borderBottomLeftRadius: -30,
+        borderBottomRightRadius: 15,
+        borderBottomWidth: 2,
+        borderBottomColor: "#ef7d00"
     },
     homeTitle: {
         color: "white",
@@ -100,7 +127,7 @@ const styles = StyleSheet.create({
         ]
     },
     headerAccent: {
-        color: "#ef7d00"
+        color: "black"
     },
     welcomeText: {
         color: "white",

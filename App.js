@@ -9,7 +9,7 @@ import { createStackNavigator } from "react-navigation";
 export default class App extends Component {
   render() {
     return (
-      < View style={styles.conainer}>
+      < View style={styles.container}>
         <AppStackNavigator />
       </View>
     );
@@ -19,10 +19,16 @@ export default class App extends Component {
 const AppStackNavigator = createStackNavigator({
   Welcome: WelcomeScreen,
   Home: HomeScreen
-})
+}, {
+    headerMode: "screen",
+    header: null,
+    navigationOptions: {
+      header: null
+    }
+  })
 
 const styles = StyleSheet.create({
-  conainer: {
+  container: {
     flex: 1
   }
 })

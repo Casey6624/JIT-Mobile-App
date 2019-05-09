@@ -57,6 +57,7 @@ export default class NewsScreen extends Component {
                                 <Image
                                     style={{ width: 150, height: 150, borderRadius: 5 }}
                                     source={{ uri: blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail.source_url }}
+                                    onPress={() => Linking.openURL(blog.link)}
                                 />
                                 <View style={styles.dateAndUserContainer}>
 
