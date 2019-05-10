@@ -27,9 +27,11 @@ class HomeScreen extends Component {
         axios.get(url)
             .then(res => {
                 if (res.status === 200 && !isNaN(res.data)) {
-                    return this.setState({ numOfCustomers: res.data })
+                    if (res.data > 0) {
+                        this.setState({ numOfCustomers: res.data })
+                    }
+                    return
                 }
-
             })
             .catch(err => {
                 console.log(err)
@@ -58,11 +60,11 @@ class HomeScreen extends Component {
                         ...a family run IT consultancy based in London 💂 + Yorkshire ☕.
                         </Text>
                     <View style={styles.lmiContainer}>
-                        <Text style={styles.LMIText}>
+                        {this.state.numOfCustomers && <Text style={styles.LMIText}>
                             Currently Helping
                             <Text style={{ color: "#ef7d00" }}> {this.state.numOfCustomers} </Text>
                             Customers
-                        </Text>
+                        </Text>}
                     </View>
                 </View>
             </ImageBackground>

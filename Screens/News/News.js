@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, Linking, ScrollView } from "react-native";
 
 import Icon from "react-native-vector-icons/Ionicons";
-import BlogImage from "../../Components/BlogImage"
 import NoImage from "../../assets/img/noImage.jpg"
 
 import axios from "axios"
@@ -57,10 +56,11 @@ export default class NewsScreen extends Component {
                         <View key={blog.id} style={styles.blog}>
                             <Text style={styles.blogTitle}>{blog.title.rendered}</Text>
                             <View style={styles.imgAndExcerpt}>
-                                {blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail && <Image
-                                    style={{ width: 150, height: 150, borderRadius: 5 }}
-                                    source={{ uri: blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail.source_url }}
-                                />}
+                                {// Here we require two blog images as we might not have a featured image set on WP
+                                    blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail && <Image
+                                        style={{ width: 150, height: 150, borderRadius: 5 }}
+                                        source={{ uri: blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail.source_url }}
+                                    />}
                                 {!blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail && <Image
                                     style={{ width: 150, height: 150, borderRadius: 5 }}
                                     source={NoImage}
