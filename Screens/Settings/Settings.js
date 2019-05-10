@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Switch, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, Switch, TextInput, TouchableOpacity, Image } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons"
 import axios from "axios"
+import JollyTeam from "../../assets/img/jollyTeam.jpg"
 
 export default class SettingsScreen extends Component {
 
@@ -9,7 +10,8 @@ export default class SettingsScreen extends Component {
         showNewsletter: false,
         emailAddress: "",
         allowPushNot: false,
-        emailError: ""
+        emailError: "",
+        showUglyMugs: false
     }
 
     setShowNewsletter = (value) => {
@@ -24,6 +26,11 @@ export default class SettingsScreen extends Component {
     setPushNot = value => {
         let newVal = !this.state.allowPushNot
         this.setState({ allowPushNot: newVal })
+    }
+
+    setUglyMugs = value => {
+        let newVal = !this.state.showUglyMugs
+        this.setState({ showUglyMugs: newVal })
     }
 
     submitEmailAddress = () => {
@@ -80,6 +87,16 @@ export default class SettingsScreen extends Component {
                     </TouchableOpacity>
                 </View>}
                 {this.state.showNewsletter && <Text style={styles.emailError}> {this.state.emailError} </Text>}
+                <View style={styles.settingsOption}>
+                    <Text style={styles.helperText}>
+                        Show Our Ugly Mugs?
+                </Text>
+                    <Switch
+                        value={this.state.showUglyMugs}
+                        onValueChange={this.setUglyMugs}
+                    />
+                </View>
+                {this.state.showUglyMugs && <Image source={JollyTeam} resizeMode="contain" style={{ width: "auto", flex: 1 }} />}
             </View>
         );
     }
