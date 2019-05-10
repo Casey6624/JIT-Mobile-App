@@ -1,23 +1,46 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Switch, TextInput, TouchableOpacity } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons"
+import axios from "axios"
 
 export default class SettingsScreen extends Component {
 
     state = {
         showNewsletter: false,
         emailAddress: "",
-        allowPushNot: false
+        allowPushNot: false,
+        emailError: ""
     }
 
     setShowNewsletter = (value) => {
         let newVal = !this.state.showNewsletter
+        if (newVal === false) {
+            this.setState({ showNewsletter: newVal, emailError: "" })
+            return
+        }
         this.setState({ showNewsletter: newVal })
     }
 
     setPushNot = value => {
         let newVal = !this.state.allowPushNot
         this.setState({ allowPushNot: newVal })
+    }
+
+    submitEmailAddress = () => {
+        if (this.state.emailAddress === "" || !this.state.emailAddress.includes("@")) {
+            this.setState({ emailError: "Please enter a valid email address." })
+            return
+        }
+        let url = "http://tasks.jollyit.co.uk/php/mobileMail.php"
+        axios.post(url, {
+            emailAddress: this.state.emailAddress
+        })
+            .then(res => {
+                this.setState({ emailError: "Success! You are now signed up." })
+            })
+            .catch(err => {
+                this.setState({ emailError: "Oops! There was an issue signing you up. Please try again later." })
+            })
     }
 
     render() {
@@ -38,7 +61,7 @@ export default class SettingsScreen extends Component {
                 </View>
                 <View style={styles.settingsOption}>
                     <Text style={styles.helperText}>
-                        Signup To Our Newsletter?
+                        Want To Recieve Our Newsletter?
                 </Text>
                     <Switch
                         value={this.state.showNewsletter}
@@ -52,11 +75,11 @@ export default class SettingsScreen extends Component {
                         placeholder="Email Address"
                         onChangeText={(text) => this.setState({ emailAddress: text })}
                     />
-                    <TouchableOpacity style={styles.tchButton}>
-                        <Icon name="ios-send" size={35} style={{ color: "#2A2F33" }} />
+                    <TouchableOpacity style={styles.tchButton} onPress={this.submitEmailAddress}>
+                        <Icon name="ios-send" size={28} style={{ color: "#2A2F33" }} />
                     </TouchableOpacity>
-
                 </View>}
+                {this.state.showNewsletter && <Text style={styles.emailError}> {this.state.emailError} </Text>}
             </View>
         );
     }
@@ -96,18 +119,25 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         margin: 10,
         borderRadius: 15,
-        width: "auto"
+        width: 250
     },
     tchButton: {
         alignItems: "center",
         backgroundColor: '#ef7d00',
         borderRadius: 5,
-        width: 70,
-        justifyContent: "center"
+        justifyContent: "center",
+        width: 50,
+        height: 50
     },
     inputAndSubmit: {
         flexDirection: "row",
-        justifyContent: "space-around",
-        alignContent: "stretch"
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    emailError: {
+        color: "white",
+        fontSize: 18,
+        fontFamily: Fonts.OpenSansConItalic,
+        textAlign: "center"
     }
 })
