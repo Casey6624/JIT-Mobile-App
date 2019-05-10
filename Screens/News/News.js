@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, Linking, ScrollView } from "react-native";
 
 import Icon from "react-native-vector-icons/Ionicons";
+import BlogImage from "../../Components/BlogImage"
+import NoImage from "../../assets/img/noImage.jpg"
 
 import axios from "axios"
 import moment from "moment"
@@ -22,7 +24,6 @@ export default class NewsScreen extends Component {
         axios.get(queryURL)
             .then(res => {
                 this.setState({ blogData: res.data })
-                console.log(res.data[0])
             })
             .catch(err => {
                 console.log(err)
@@ -30,7 +31,6 @@ export default class NewsScreen extends Component {
     }
 
     stripHTML = (rawHTML) => {
-        console.log(rawHTML)
         const regex = /(<([^>]+)>)/ig;
         let strippedExcerpt = rawHTML.replace(regex, '');
         if (strippedExcerpt.includes("[&hellip;]")) {
@@ -57,11 +57,14 @@ export default class NewsScreen extends Component {
                         <View key={blog.id} style={styles.blog}>
                             <Text style={styles.blogTitle}>{blog.title.rendered}</Text>
                             <View style={styles.imgAndExcerpt}>
-                                <Image
+                                {blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail && <Image
                                     style={{ width: 150, height: 150, borderRadius: 5 }}
                                     source={{ uri: blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail.source_url }}
-                                    onPress={() => Linking.openURL(blog.link)}
-                                />
+                                />}
+                                {!blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail && <Image
+                                    style={{ width: 150, height: 150, borderRadius: 5 }}
+                                    source={NoImage}
+                                />}
                                 <View style={styles.dateAndUserContainer}>
 
                                     <Text style={styles.dateAndUserTxt}>

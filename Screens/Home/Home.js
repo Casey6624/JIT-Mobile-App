@@ -133,14 +133,6 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontFamily: Fonts.RobotoLight
     },
-    JollyRobot: {
-        width: 270,
-        marginTop: 0,
-        marginLeft: 20,
-        transform: [
-            { rotate: '40deg' }
-        ]
-    },
     headerAccent: {
         color: "black"
     },
@@ -157,6 +149,7 @@ const styles = StyleSheet.create({
         textAlign: "right",
         backgroundColor: "#2A2F33",
         justifyContent: "flex-end",
+        padding: 10
         //display: this.state.numOfCustomers === null || this.state.numOfCustomers === 0 ? "none" : "flex"
     },
     welcomeText: {
@@ -169,7 +162,7 @@ const styles = StyleSheet.create({
     },
     LMIText: {
         color: "white",
-        fontSize: 22,
+        fontSize: 24,
         textAlign: "right"
     }
 })
