@@ -3,21 +3,24 @@ import { Text, View, StyleSheet, Switch, TextInput, TouchableOpacity, Image } fr
 import Icon from "react-native-vector-icons/Ionicons"
 import axios from "axios"
 import JollyTeam from "../../assets/img/jollyTeam.jpg"
+import Fonts from "../../utils/fonts"
 
 export default class SettingsScreen extends Component {
 
     state = {
+        emailIcons: ["md-close-circle-outline", "md-checkmark"],
         showNewsletter: false,
         emailAddress: "",
         allowPushNot: false,
         emailError: "",
-        showUglyMugs: false
+        showUglyMugs: false,
+        currEmailIcon: null
     }
 
     setShowNewsletter = (value) => {
         let newVal = !this.state.showNewsletter
         if (newVal === false) {
-            this.setState({ showNewsletter: newVal, emailError: "" })
+            this.setState({ showNewsletter: newVal, emailError: "", currEmailIcon: null })
             return
         }
         this.setState({ showNewsletter: newVal })
@@ -35,7 +38,7 @@ export default class SettingsScreen extends Component {
 
     submitEmailAddress = () => {
         if (this.state.emailAddress === "" || !this.state.emailAddress.includes("@")) {
-            this.setState({ emailError: "Please enter a valid email address." })
+            this.setState({ emailError: "Please enter a valid email address.", currEmailIcon: this.state.emailIcons[0] })
             return
         }
         let url = "http://tasks.jollyit.co.uk/php/mobileMail.php"
@@ -43,10 +46,10 @@ export default class SettingsScreen extends Component {
             emailAddress: this.state.emailAddress
         })
             .then(res => {
-                this.setState({ emailError: "Success! You are now signed up." })
+                this.setState({ emailError: "Success! You are now signed up.", currEmailIcon: this.state.emailIcons[1] })
             })
             .catch(err => {
-                this.setState({ emailError: "Oops! There was an issue signing you up. Please try again later." })
+                this.setState({ emailError: "Oops! There was an issue signing you up. Please try again later.", currEmailIcon: this.state.emailIcons[0] })
             })
     }
 
@@ -54,7 +57,7 @@ export default class SettingsScreen extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.headerText}>
-                    <Text style={styles.welcomeText}>SETTINGS</Text>
+                    <Text style={styles.welcomeText}>JOLLY IT</Text>
                     <Icon name="ios-hammer" size={35} style={{ color: "#2A2F33" }} />
                 </View>
                 <View style={styles.settingsOption}>
@@ -86,7 +89,7 @@ export default class SettingsScreen extends Component {
                         <Icon name="ios-send" size={28} style={{ color: "#2A2F33" }} />
                     </TouchableOpacity>
                 </View>}
-                {this.state.showNewsletter && <Text style={styles.emailError}> {this.state.emailError} </Text>}
+                {this.state.showNewsletter && <Text style={styles.emailError}> <Icon name={this.state.currEmailIcon} size={28} style={{ color: "#ef7d00" }} /> {this.state.emailError} </Text>}
                 <View style={styles.settingsOption}>
                     <Text style={styles.helperText}>
                         Show Our Ugly Mugs?
@@ -112,14 +115,15 @@ const styles = StyleSheet.create({
         padding: 10,
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        elevation: 2
     },
     welcomeText: {
         color: "white",
         fontSize: 28,
         fontWeight: "bold",
         margin: 15,
-        fontFamily: Fonts.OpenSansConBold,
+        fontFamily: Fonts.RobotoLight,
         fontWeight: "400"
     },
     helperText: {
@@ -152,9 +156,9 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     emailError: {
-        color: "white",
-        fontSize: 18,
-        fontFamily: Fonts.OpenSansConItalic,
+        color: "#ef7d00",
+        fontSize: 22,
+        fontFamily: Fonts.OpenSansCon,
         textAlign: "center"
     }
 })

@@ -10,7 +10,7 @@ export default class AboutScreen extends Component {
         return (
             <ImageBackground style={styles.container} source={BigBen}>
                 <View style={styles.headerText}>
-                    <Text style={styles.welcomeText}>ABOUT</Text>
+                    <Text style={styles.welcomeText}>JOLLY IT</Text>
                     <Icon name="ios-people" size={35} style={{ color: "#2A2F33" }} />
                 </View>
                 <Text style={styles.bio}>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         fontSize: 28,
         fontWeight: "bold",
         margin: 15,
-        fontFamily: Fonts.OpenSansConBold,
+        fontFamily: Fonts.RobotoLight,
         fontWeight: "400"
     },
     homeTitle: {

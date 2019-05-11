@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity, Linking, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, Linking, ScrollView, Animated } from "react-native";
 
 import Icon from "react-native-vector-icons/Ionicons";
 import NoImage from "../../assets/img/noImage.jpg"
@@ -11,7 +11,8 @@ export default class NewsScreen extends Component {
 
     state = {
         pullingBlogsInProgress: true,
-        blogData: []
+        blogData: [],
+        animVal: new Animated.Value(0)
     }
 
     componentDidMount() {
@@ -38,6 +39,14 @@ export default class NewsScreen extends Component {
         return strippedExcerpt
     }
 
+    onImgLoad = () => {
+        Animated.timing(this.state.animVal, {
+            toValue: 1,
+            duration: 500,
+            useNativeDriver: true
+        }).start()
+    }
+
     render() {
         if (this.state.pullingBlogsInProgress) {
             <View style={styles.container}>
@@ -48,7 +57,7 @@ export default class NewsScreen extends Component {
         return (
             <ScrollView style={styles.container}>
                 <View style={styles.headerText}>
-                    <Text style={styles.welcomeText}>NEWS</Text>
+                    <Text style={styles.welcomeText}>JOLLY IT</Text>
                     <Icon name="ios-paper" size={35} style={{ color: "#2A2F33" }} />
                 </View>
                 <View style={styles.innerContainer}>
@@ -56,26 +65,49 @@ export default class NewsScreen extends Component {
                         <View key={blog.id} style={styles.blog}>
                             <Text style={styles.blogTitle}>{blog.title.rendered}</Text>
                             <View style={styles.imgAndExcerpt}>
-                                {// Here we require two blog images as we might not have a featured image set on WP
-                                    blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail && <Image
+                                <Animated.View style={{
+                                    opacity: this.state.animVal, transform: [
+                                        {
+                                            translateX: this.state.animVal.interpolate({
+                                                inputRange: [0, 1],
+                                                outputRange: [12, 1]
+                                            })
+                                        }
+                                    ]
+                                }}>
+                                    {// Here we require two blog images as we might not have a featured image set on WP
+                                        blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail && <Image
+                                            style={{ width: 150, height: 150, borderRadius: 5 }}
+                                            source={{ uri: blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail.source_url }}
+                                        />}
+                                    {!blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail && <Image
                                         style={{ width: 150, height: 150, borderRadius: 5 }}
-                                        source={{ uri: blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail.source_url }}
+                                        source={NoImage}
+                                        onLoadEnd={this.onImgLoad}
                                     />}
-                                {!blog._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail && <Image
-                                    style={{ width: 150, height: 150, borderRadius: 5 }}
-                                    source={NoImage}
-                                />}
-                                <View style={styles.dateAndUserContainer}>
+                                </Animated.View>
+                                <Animated.View style={{
+                                    opacity: this.state.animVal, transform: [
+                                        {
+                                            translateY: this.state.animVal.interpolate({
+                                                inputRange: [0, 1],
+                                                outputRange: [12, 1]
+                                            })
+                                        }
+                                    ]
+                                }}>
+                                    <View style={styles.dateAndUserContainer}>
 
-                                    <Text style={styles.dateAndUserTxt}>
-                                        <Icon name="md-time" size={20} style={styles.blogIcons} />
-                                        &nbsp; {moment(blog.date_gmt).format('LL')}
-                                    </Text>
-                                    <Text style={styles.dateAndUserTxt}>
-                                        <Icon name="md-person" size={20} style={styles.blogIcons} />
-                                        &nbsp; {blog._embedded.author[0].name}
-                                    </Text>
-                                </View>
+                                        <Text style={styles.dateAndUserTxt}>
+                                            <Icon name="md-time" size={20} style={styles.blogIcons} />
+                                            &nbsp; {moment(blog.date_gmt).format('LL')}
+                                        </Text>
+                                        <Text style={styles.dateAndUserTxt}>
+                                            <Icon name="md-person" size={20} style={styles.blogIcons} />
+                                            &nbsp; {blog._embedded.author[0].name}
+                                        </Text>
+                                    </View>
+                                </Animated.View>
                             </View>
                             <Text style={styles.excerpt}>
                                 {this.stripHTML(blog.excerpt.rendered)}
@@ -111,7 +143,7 @@ const styles = StyleSheet.create({
         fontSize: 28,
         fontWeight: "bold",
         margin: 15,
-        fontFamily: Fonts.OpenSansConBold,
+        fontFamily: Fonts.RobotoLight,
         fontWeight: "400"
     },
     blog: {
@@ -123,7 +155,7 @@ const styles = StyleSheet.create({
     dateAndUserContainer: {
         margin: 20
     },
-    dateAndUserTxt: { margin: 5, color: "white", fontSize: 20 },
+    dateAndUserTxt: { margin: 5, color: "white", fontSize: 20, fontFamily: Fonts.RobotoLight },
     blogIcons: { marginRight: 10, color: "#ef7d00" },
     imgAndExcerpt: {
         flexDirection: "row",
@@ -131,8 +163,9 @@ const styles = StyleSheet.create({
     },
     excerpt: {
         color: "white",
-        fontSize: 18,
-        paddingTop: 10
+        fontSize: 22,
+        paddingTop: 10,
+        fontFamily: Fonts.RobotoLight,
     },
     viewMoreBtn: {
         backgroundColor: "#ef7d00",
