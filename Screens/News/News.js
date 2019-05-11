@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity, Linking, ScrollView, Animated } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, Linking, ScrollView, Animated, Easing } from "react-native";
 
 import Icon from "react-native-vector-icons/Ionicons";
 import NoImage from "../../assets/img/noImage.jpg"
@@ -12,11 +12,18 @@ export default class NewsScreen extends Component {
     state = {
         pullingBlogsInProgress: true,
         blogData: [],
-        animVal: new Animated.Value(0)
+        animVal: new Animated.Value(0),
+        spinAnimVal: new Animated.Value(0)
     }
 
     componentDidMount() {
         this.getPosts();
+        Animated.timing(this.state.spinAnimVal, {
+            toValue: 1,
+            duration: 3000,
+            easing: Easing.linear,
+            useNativeDriver: true,
+        }).start()
     }
 
     getPosts = () => {
@@ -48,11 +55,31 @@ export default class NewsScreen extends Component {
     }
 
     render() {
-        if (this.state.pullingBlogsInProgress) {
-            <View style={styles.container}>
-                <Text style={styles.loadingBlogs}>Loading...</Text>
-            </View>
-        }
+
+        return (
+            <ScrollView style={styles.container}>
+                <View style={styles.headerText}>
+                    <Text style={styles.welcomeText}>JOLLY IT</Text>
+                    <Icon name="ios-paper" size={35} style={{ color: "#2A2F33" }} />
+                </View>
+                <Animated.View style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignSelf: "center",
+                    // Animations
+                    opacity: this.state.spinAnimVal, transform: [
+                        {
+                            rotateX: this.state.spinAnimVal.interpolate({
+                                inputRange: [0, 1],
+                                outputRange: ['0deg', '360deg']
+                            })
+                        }
+                    ]
+                }}>
+                    <Icon name="ios-aperture" size={100} style={{ color: "#ef7d00" }} />
+                </Animated.View>
+            </ScrollView>
+        )
 
         return (
             <ScrollView style={styles.container}>
@@ -127,6 +154,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: "#2A2F33",
         flex: 1,
+        alignContent: "center"
     },
     innerContainer: {
         padding: 10
