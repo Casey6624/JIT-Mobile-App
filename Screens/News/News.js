@@ -86,17 +86,18 @@ export default class NewsScreen extends Component {
                 }}>
                     <View style={styles.headerText}>
                         <Text style={styles.welcomeText}>JOLLY IT</Text>
-                        <Icon name="ios-paper" size={35} style={{ color: "#2A2F33" }} />
+                        <Icon name="md-paper" size={35} style={{ color: "#2A2F33" }} />
                     </View>
                     <Animated.View style={{
                         flex: 1,
                         justifyContent: "center",
+                        textAlign: "center",
                         // Animations
                         opacity: this.state.spinAnimVal, transform: [
                             {
-                                rotateY: this.state.spinAnimVal.interpolate({
+                                rotateX: this.state.spinAnimVal.interpolate({
                                     inputRange: [0, 1],
-                                    outputRange: ['0deg', '360deg']
+                                    outputRange: ['0deg', '720deg']
                                 })
                             }
                         ]
@@ -109,9 +110,9 @@ export default class NewsScreen extends Component {
                             flex: 1,
                             alignContent: "center"
                         }}>
-                        <Icon name="ios-aperture" size={100} style={{ color: "#ef7d00" }} />
+                        <Icon name="md-aperture" size={100} style={{ color: "#ef7d00" }} />
                     </Animated.View>
-                </ScrollView>
+                </ScrollView >
             )
         }
 
@@ -120,10 +121,14 @@ export default class NewsScreen extends Component {
                 <ScrollView style={styles.spinnerContainer}>
                     <View style={styles.headerText}>
                         <Text style={styles.welcomeText}>JOLLY IT</Text>
-                        <Icon name="ios-paper" size={35} style={{ color: "#2A2F33" }} />
+                        <Icon name="md-paper" size={35} style={{ color: "#2A2F33" }} />
                     </View>
                     <View style={styles.innerContainer}>
-                        <Text> Oops! Could not pull blog information at this time. Please try again later. </Text>
+                        <Text style={{
+                            fontSize: 48,
+                            color: "white",
+
+                        }}> 😢 Oops! Could not pull blog information at this time. Please try again later. </Text>
                     </View>
                 </ScrollView>
             )
@@ -133,7 +138,7 @@ export default class NewsScreen extends Component {
             <ScrollView style={styles.container}>
                 <View style={styles.headerText}>
                     <Text style={styles.welcomeText}>JOLLY IT</Text>
-                    <Icon name="ios-paper" size={35} style={{ color: "#2A2F33" }} />
+                    <Icon name="md-paper" size={35} style={{ color: "#2A2F33" }} />
                 </View>
                 <View style={styles.innerContainer}>
                     {this.state.blogData.map((blog, index) =>

@@ -5,6 +5,7 @@ import { TabNavigator, TabBarBottom, createBottomTabNavigator } from "react-navi
 import axios from "axios"
 // Utils 
 import Icon from "react-native-vector-icons/Ionicons";
+import IconFontAwesome from "react-native-vector-icons/FontAwesome";
 import LogoImage from "../../assets/img/whitelogotrans.png";
 import JollyIcon from "../../assets/img/jollyIcon.png"
 import Fonts from "../../utils/fonts";
@@ -31,11 +32,7 @@ class HomeScreen extends Component {
                 if (res.status === 200 && !isNaN(res.data)) {
                     if (res.data > 0) {
                         this.setState({ numOfCustomers: res.data })
-                        Animated.timing(this.state.showAnim, {
-                            toValue: 1,
-                            duration: 500,
-                            useNativeDriver: true
-                        }).start()
+                        this.animateBoxes()
                     }
                     return
                 }
@@ -46,6 +43,14 @@ class HomeScreen extends Component {
             })
     }
 
+    animateBoxes = () => {
+        Animated.timing(this.state.showAnim, {
+            toValue: 1,
+            duration: 500,
+            useNativeDriver: true
+        }).start()
+    }
+
     render() {
 
         return (
@@ -54,7 +59,7 @@ class HomeScreen extends Component {
 
                     <Text style={styles.welcomeText}>JOLLY IT</Text>
 
-                    <Icon name="ios-home" size={35} style={{ color: "#2A2F33" }} />
+                    <Icon name="md-home" size={35} style={{ color: "#2A2F33" }} />
                 </View>
                 <View style={styles.contentContainer}
                 >
@@ -80,6 +85,7 @@ class HomeScreen extends Component {
                             ...a family run IT consultancy based in London 💂 + Yorkshire ☕.
                         </Text>
                     </Animated.View>
+
                     <Animated.View style={{
                         justifyContent: "flex-start",
                         marginTop: 10,
@@ -89,7 +95,7 @@ class HomeScreen extends Component {
                             {
                                 translateX: this.state.showAnim.interpolate({
                                     inputRange: [0, 1],
-                                    outputRange: [5, 1]
+                                    outputRange: [20, 1]
                                 })
                             },
                             {
@@ -101,11 +107,37 @@ class HomeScreen extends Component {
                         ]
                     }}>
                         {this.state.numOfCustomers && <Text style={styles.LMIText}>
-                            <Icon name="ios-help-buoy" size={25} style={{ color: "#ef7d00" }} /> Currently Helping
-                            <Text style={{ color: "#ef7d00", fontWeight: "bold" }}> {this.state.numOfCustomers} </Text>
+                            <IconFontAwesome name="support" size={25} style={{ color: "#ef7d00" }} /> Currently Helping
+                            <Text style={{ color: "#ef7d00", fontFamily: Fonts.OpenSansConBold }}> {this.state.numOfCustomers} </Text>
                             Customers
                             </Text>}
                     </Animated.View>
+
+                    <Animated.View style={{
+                        justifyContent: "flex-start",
+                        marginTop: 10,
+                        alignItems: "center",
+                        fontFamily: Fonts.RobotoLight,
+                        borderRadius: 10, textAlign: "center", padding: 5, backgroundColor: "#2A2F33", opacity: this.state.showAnim, transform: [
+                            {
+                                translateX: this.state.showAnim.interpolate({
+                                    inputRange: [0, 1],
+                                    outputRange: [30, 1]
+                                })
+                            },
+                            {
+                                translateY: this.state.showAnim.interpolate({
+                                    inputRange: [0, 1],
+                                    outputRange: [20, 1]
+                                })
+                            }
+                        ]
+                    }}>
+                        {this.state.numOfCustomers && <Text style={styles.LMIText}>
+                            <IconFontAwesome name="bar-chart" size={25} style={{ color: "#ef7d00" }} /> <Text style={{ fontFamily: Fonts.RobotoBold }}> 4.96 / 5 </Text> Satisfaction Rate
+                            </Text>}
+                    </Animated.View>
+
                 </View>
             </ImageBackground >
         );
@@ -136,7 +168,7 @@ export default createBottomTabNavigator({
         navigationOptions: {
             tabBarLabel: "About",
             tabBarIcon: () => (
-                <Icon name="md-people" size={28} />
+                <Icon name="md-people" size={24} />
             )
         }
     },
@@ -151,7 +183,13 @@ export default createBottomTabNavigator({
             headerLeft: null
         }
     }
-})
+}, {
+        tabBarOptions: {
+            activeTintColor: "#ef7d00",
+            activeBackgroundColor: "#f2f2f2",
+            allowFontScaling: true
+        }
+    })
 
 const styles = StyleSheet.create({
     container: {
@@ -186,15 +224,6 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         width: 200
     },
-    lmiContainer: {
-        flexDirection: "row",
-        marginTop: 40,
-        textAlign: "right",
-        backgroundColor: "#2A2F33",
-        justifyContent: "flex-start",
-        padding: 10,
-        borderRadius: 10
-    },
     welcomeText: {
         color: "white",
         fontSize: 28,
@@ -203,11 +232,19 @@ const styles = StyleSheet.create({
         fontFamily: Fonts.RobotoLight,
         fontWeight: "400"
     },
+    lmiContainer: {
+        flexDirection: "row",
+        flex: 1,
+        marginTop: 48,
+        textAlign: "left",
+        backgroundColor: "#2A2F33",
+        justifyContent: "flex-start",
+        borderRadius: 10
+    },
     LMIText: {
         color: "white",
         fontSize: 22,
-        textAlign: "left",
         fontFamily: Fonts.RobotoLight,
-        alignItems: "center"
+        justifyContent: "flex-start"
     }
 })

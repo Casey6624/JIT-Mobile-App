@@ -58,7 +58,7 @@ export default class SettingsScreen extends Component {
             <View style={styles.container}>
                 <View style={styles.headerText}>
                     <Text style={styles.welcomeText}>JOLLY IT</Text>
-                    <Icon name="ios-hammer" size={35} style={{ color: "#2A2F33" }} />
+                    <Icon name="md-cog" size={35} style={{ color: "#2A2F33" }} />
                 </View>
                 <View style={styles.settingsOption}>
                     <Text style={styles.helperText}>
@@ -86,7 +86,7 @@ export default class SettingsScreen extends Component {
                         onChangeText={(text) => this.setState({ emailAddress: text })}
                     />
                     <TouchableOpacity style={styles.tchButton} onPress={this.submitEmailAddress}>
-                        <Icon name="ios-send" size={28} style={{ color: "#2A2F33" }} />
+                        <Icon name="md-send" size={28} style={{ color: "#2A2F33" }} />
                     </TouchableOpacity>
                 </View>}
                 {this.state.showNewsletter && <Text style={styles.emailError}> <Icon name={this.state.currEmailIcon} size={28} style={{ color: "#ef7d00" }} /> {this.state.emailError} </Text>}
