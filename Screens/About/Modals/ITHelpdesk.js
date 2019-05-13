@@ -19,17 +19,17 @@ const ITHelpdesk = props => {
             </View>
             <View style={styles.ul}>
                 <Text style={styles.li}>
-                    <IconFA name="support" size={25} style={{ color: "#ef7d00" }} /> Fully Managed IT Support
+                    <IconFA name="support" size={25} style={{ color: "#ef7d00" }} /> Fully <Text style={{ fontFamily: Fonts.RobotoBold }}>Managed</Text> IT Support
             </Text>
             </View>
             <View style={styles.ul}>
                 <Text style={styles.li}>
-                    <IconEncrypto name="infinity" size={25} style={{ color: "#ef7d00" }} /> Unlimited, All You Can Eat Support
+                    <IconEncrypto name="infinity" size={25} style={{ color: "#ef7d00" }} /> <Text style={{ fontFamily: Fonts.RobotoBold }}>Unlimited</Text>, All You Can Eat Support
             </Text>
             </View>
             <View style={styles.ul}>
                 <Text style={styles.li}>
-                    <IconEncrypto name="area-graph" size={25} style={{ color: "#ef7d00" }} /> Proactive Monitoring
+                    <IconEncrypto name="area-graph" size={25} style={{ color: "#ef7d00" }} /> <Text style={{ fontFamily: Fonts.RobotoBold }}>Proactive</Text> Monitoring
             </Text>
             </View>
             <CallToAction

@@ -14,30 +14,30 @@ const WebDesign = props => {
                 <Text style={styles.tagLine}>
                     Get Your Business Online.
             </Text>
-            </View>
-            <View style={styles.ul}>
-                <Text style={styles.li}>
-                    <IconEncrypto name="pencil" size={25} style={{ color: "#ef7d00" }} /> Brand Identity
+                <View style={styles.ul}>
+                    <Text style={styles.li}>
+                        <IconEncrypto name="pencil" size={25} style={{ color: "#ef7d00" }} /> Brand Identity
                 </Text>
-            </View>
-            <View style={styles.ul}>
-                <Text style={styles.li}>
-                    <IconMCI name="responsive" size={25} style={{ color: "#ef7d00" }} /> Fully Responsive Sites on All Devices
+                </View>
+                <View style={styles.ul}>
+                    <Text style={styles.li}>
+                        <IconMCI name="responsive" size={25} style={{ color: "#ef7d00" }} /> Fully Responsive Sites
                 </Text>
-            </View>
-            <View style={styles.ul}>
-                <Text style={styles.li}>
-                    <IconFA name="search" size={25} style={{ color: "#ef7d00" }} /> SEO Experts
+                </View>
+                <View style={styles.ul}>
+                    <Text style={styles.li}>
+                        <IconFA name="search" size={25} style={{ color: "#ef7d00" }} /> SEO Experts
                 </Text>
-            </View>
-            <View style={styles.ul}>
-                <Text style={styles.li}>
-                    <IconFA name="wordpress" size={25} style={{ color: "#ef7d00" }} /> WordPress CMS
+                </View>
+                <View style={styles.ul}>
+                    <Text style={styles.li}>
+                        <IconFA name="wordpress" size={25} style={{ color: "#ef7d00" }} /> WordPress CMS
                 </Text>
-            </View>
-            <Text style={styles.tagLine}>
-                We work with all size businesses to help increase their online presence.
+                </View>
+                <Text style={styles.tagLine}>
+                    We work with all size businesses to help increase their online presence.
             </Text>
+            </View>
             <TouchableOpacity style={styles.btn}
                 onPress={() => Linking.openURL("https://www.jollyit.co.uk/web-design/")}
             >

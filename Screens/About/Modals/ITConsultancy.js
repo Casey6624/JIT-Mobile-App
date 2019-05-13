@@ -3,6 +3,7 @@ import Fonts from "../../../utils/fonts"
 import SquareLogo from "../../../assets/img/jollyIcon.png"
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, Linking } from "react-native"
 import IconEncrypto from "react-native-vector-icons/Entypo";
+import IconMCI from "react-native-vector-icons/MaterialCommunityIcons"
 
 const ITConsultancy = props => {
     return (
@@ -15,27 +16,27 @@ const ITConsultancy = props => {
             </View>
             <View style={styles.ul}>
                 <Text style={styles.li}>
-                    <IconEncrypto name="chevron-small-right" size={25} style={{ color: "#ef7d00" }} /> Bespoke IT Training
+                    <IconEncrypto name="pencil" size={25} style={{ color: "#ef7d00" }} /> Bespoke IT Training
             </Text>
             </View>
             <View style={styles.ul}>
                 <Text style={styles.li}>
-                    <IconEncrypto name="chevron-small-right" size={25} style={{ color: "#ef7d00" }} /> Office Relocations
+                    <IconMCI name="office-building" size={25} style={{ color: "#ef7d00" }} /> Office Relocations
             </Text>
             </View>
             <View style={styles.ul}>
                 <Text style={styles.li}>
-                    <IconEncrypto name="chevron-small-right" size={25} style={{ color: "#ef7d00" }} /> Business Continuity
+                    <IconEncrypto name="flow-branch" size={25} style={{ color: "#ef7d00" }} /> Business Continuity
             </Text>
             </View>
             <View style={styles.ul}>
                 <Text style={styles.li}>
-                    <IconEncrypto name="chevron-small-right" size={25} style={{ color: "#ef7d00" }} /> Disaster Recovery
+                    <IconMCI name="database" size={25} style={{ color: "#ef7d00" }} /> Disaster Recovery
             </Text>
             </View>
             <View style={styles.ul}>
                 <Text style={styles.li}>
-                    <IconEncrypto name="chevron-small-right" size={25} style={{ color: "#ef7d00" }} /> One Stop Shop For Technical Expertise
+                    <IconEncrypto name="trophy" size={25} style={{ color: "#ef7d00" }} /> One Stop Shop For Technical Expertise
             </Text>
             </View>
             <TouchableOpacity style={styles.btn}
