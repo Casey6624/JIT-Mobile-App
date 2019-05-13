@@ -32,7 +32,6 @@ class HomeScreen extends Component {
                 if (res.status === 200 && !isNaN(res.data)) {
                     if (res.data > 0) {
                         this.setState({ numOfCustomers: res.data })
-                        this.animateBoxes()
                     }
                     return
                 }
@@ -54,7 +53,7 @@ class HomeScreen extends Component {
     render() {
 
         return (
-            <ImageBackground style={styles.container} source={SheffieldTrain}>
+            <ImageBackground style={styles.container} source={SheffieldTrain} onLoad={this.animateBoxes()}>
                 <View style={styles.headerText}>
 
                     <Text style={styles.welcomeText}>JOLLY IT</Text>

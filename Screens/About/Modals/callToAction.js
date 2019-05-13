@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     contentCollapsed: {
         fontFamily: Fonts.RobotoLight,
         fontSize: 22,
+        color: "white",
         height: 35
     },
     title: {
@@ -59,7 +60,8 @@ const styles = StyleSheet.create({
     },
     content: {
         fontFamily: Fonts.RobotoLight,
-        fontSize: 22
+        fontSize: 22,
+        color: "white"
     }
 })
 
