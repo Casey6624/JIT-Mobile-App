@@ -8,6 +8,7 @@ import Fonts from "../../utils/fonts"
 import ITHelpdesk from "./Modals/ITHelpdesk"
 import ITConsultancy from "./Modals/ITConsultancy"
 import WebDesign from "./Modals/WebDesign"
+import AboutUs from "./Modals/AboutUs"
 
 
 export default class AboutScreen extends Component {
@@ -72,6 +73,17 @@ export default class AboutScreen extends Component {
                     </Animated.View>
                     <View>
                         <TouchableOpacity style={styles.modalBtns}
+                            onPress={() => this.setModalVisible(!this.state.modalVisible, "AboutUs")}
+                        >
+                            <Text style={styles.btnText}> ABOUT US </Text>
+                        </TouchableOpacity>
+                        <Text style={{
+                            fontSize: 24,
+                            color: "black",
+                            fontFamily: Fonts.OpenSansConBold,
+                            marginLeft: 60
+                        }}> - - - </Text>
+                        <TouchableOpacity style={styles.modalBtns}
                             onPress={() => this.setModalVisible(!this.state.modalVisible, "ITHelpdesk")}
                         >
                             <Text style={styles.btnText}> IT HELPDESK </Text>
@@ -101,6 +113,7 @@ export default class AboutScreen extends Component {
                             {this.state.modalType === "ITHelpdesk" ? <ITHelpdesk /> : null}
                             {this.state.modalType === "ITConsultancy" ? <ITConsultancy /> : null}
                             {this.state.modalType === "WebDesign" ? <WebDesign /> : null}
+                            {this.state.modalType === "AboutUs" ? <AboutUs /> : null}
 
                             <TouchableOpacity style={styles.modalBtns}
                                 onPress={() => this.setModalVisible(!this.state.modalVisible)}>

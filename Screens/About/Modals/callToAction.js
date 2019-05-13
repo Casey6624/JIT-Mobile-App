@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     callToAction: {
         backgroundColor: "#ef7d00",
         margin: 10,
-        borderRadius: 15,
+        borderRadius: 5,
         padding: 15,
     },
     titleCollapsed: {

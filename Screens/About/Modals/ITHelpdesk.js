@@ -3,6 +3,7 @@ import Fonts from "../../../utils/fonts"
 import SquareLogo from "../../../assets/img/jollyIcon.png"
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, Linking } from "react-native"
 import IconEncrypto from "react-native-vector-icons/Entypo";
+import IconFA from "react-native-vector-icons/FontAwesome"
 
 //Components
 import CallToAction from "./callToAction"
@@ -18,17 +19,17 @@ const ITHelpdesk = props => {
             </View>
             <View style={styles.ul}>
                 <Text style={styles.li}>
-                    <IconEncrypto name="chevron-small-right" size={25} style={{ color: "#ef7d00" }} /> Fully Managed IT Support
+                    <IconFA name="support" size={25} style={{ color: "#ef7d00" }} /> Fully Managed IT Support
             </Text>
             </View>
             <View style={styles.ul}>
                 <Text style={styles.li}>
-                    <IconEncrypto name="chevron-small-right" size={25} style={{ color: "#ef7d00" }} /> Unlimited, All You Can Eat Support
+                    <IconEncrypto name="infinity" size={25} style={{ color: "#ef7d00" }} /> Unlimited, All You Can Eat Support
             </Text>
             </View>
             <View style={styles.ul}>
                 <Text style={styles.li}>
-                    <IconEncrypto name="chevron-small-right" size={25} style={{ color: "#ef7d00" }} /> Proactive Monitoring
+                    <IconEncrypto name="area-graph" size={25} style={{ color: "#ef7d00" }} /> Proactive Monitoring
             </Text>
             </View>
             <CallToAction
@@ -39,7 +40,7 @@ const ITHelpdesk = props => {
             <TouchableOpacity style={styles.btn}
                 onPress={() => Linking.openURL("https://www.jollyit.co.uk/it-helpdesk/")}
             >
-                <Text style={styles.btnText}> Interested? Read More Online </Text>
+                <Text style={styles.btnText}> Interested? Get More Details Online </Text>
                 <IconEncrypto name="browser" size={25} style={{ color: "#2A2F33" }} />
             </TouchableOpacity>
         </ScrollView>
