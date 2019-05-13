@@ -4,43 +4,52 @@ import SquareLogo from "../../../assets/img/jollyIcon.png"
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, Linking } from "react-native"
 import IconEncrypto from "react-native-vector-icons/Entypo";
 
-//Components
-import CallToAction from "./callToAction"
-
-const ITHelpdesk = props => {
+const ITConsultancy = props => {
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.ModalTitle}> IT HELPDESK <Image source={SquareLogo} /> </Text>
+            <Text style={styles.ModalTitle}> IT CONSULTANCY <Image source={SquareLogo} /> </Text>
             <View style={styles.mainContent}>
                 <Text style={styles.tagLine}>
-                    Something for small businesses, large businesses and everyone inbetween.
+                    Maximise Your Investment In Technology.
             </Text>
             </View>
             <View style={styles.ul}>
                 <Text style={styles.li}>
-                    <IconEncrypto name="chevron-small-right" size={25} style={{ color: "#ef7d00" }} /> Fully Managed IT Support
+                    <IconEncrypto name="chevron-small-right" size={25} style={{ color: "#ef7d00" }} /> Bespoke IT Training
             </Text>
             </View>
             <View style={styles.ul}>
                 <Text style={styles.li}>
-                    <IconEncrypto name="chevron-small-right" size={25} style={{ color: "#ef7d00" }} /> Unlimited, All You Can Eat Support
+                    <IconEncrypto name="chevron-small-right" size={25} style={{ color: "#ef7d00" }} /> Office Relocations
             </Text>
             </View>
             <View style={styles.ul}>
                 <Text style={styles.li}>
-                    <IconEncrypto name="chevron-small-right" size={25} style={{ color: "#ef7d00" }} /> Proactive Monitoring
+                    <IconEncrypto name="chevron-small-right" size={25} style={{ color: "#ef7d00" }} /> Business Continuity
             </Text>
             </View>
-            <CallToAction
-                title="FREE IT AUDIT"
-                content="We provide an open and honest service. There are no obligations, and no catches – we differ from other IT companies because our initial evaluation and advice is offered by a senior consultant who can offer independent advice tailored to your business;  not simply a sales tactic to sell unsuitable products and services."
-            />
+            <View style={styles.ul}>
+                <Text style={styles.li}>
+                    <IconEncrypto name="chevron-small-right" size={25} style={{ color: "#ef7d00" }} /> Disaster Recovery
+            </Text>
+            </View>
+            <View style={styles.ul}>
+                <Text style={styles.li}>
+                    <IconEncrypto name="chevron-small-right" size={25} style={{ color: "#ef7d00" }} /> One Stop Shop For Technical Expertise
+            </Text>
+            </View>
+            <TouchableOpacity style={styles.btn}
+                onPress={() => Linking.openURL("https://www.jollyit.co.uk/it-consultancy/")}
+            >
+                <Text style={styles.btnText}> Read More Benefits Online </Text>
+                <IconEncrypto name="browser" size={25} style={{ color: "#2A2F33" }} />
+            </TouchableOpacity>
 
             <TouchableOpacity style={styles.btn}
-                onPress={() => Linking.openURL("https://www.jollyit.co.uk/it-helpdesk/")}
+                onPress={() => Linking.openURL(`tel:08003317668`)}
             >
-                <Text style={styles.btnText}> Interested? Read More Online </Text>
-                <IconEncrypto name="browser" size={25} style={{ color: "#2A2F33" }} />
+                <Text style={styles.btnText}> Call Us For A Bespoke Quote </Text>
+                <IconEncrypto name="old-phone" size={25} style={{ color: "#2A2F33" }} />
             </TouchableOpacity>
         </ScrollView>
     )
@@ -56,12 +65,14 @@ const styles = StyleSheet.create({
     ul: {
         marginLeft: 25,
         marginRight: 25,
-        marginBottom: 10
+        marginBottom: 10,
+        flexDirection: "row",
+        alignItems: "center"
     },
     li: {
         fontSize: 25,
         color: "white",
-        fontFamily: Fonts.RobotoLight
+        fontFamily: Fonts.RobotoLight,
     },
     ModalTitle: {
         fontFamily: Fonts.RobotoBold,
@@ -97,4 +108,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ITHelpdesk
+export default ITConsultancy

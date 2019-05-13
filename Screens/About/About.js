@@ -6,6 +6,8 @@ import Fonts from "../../utils/fonts"
 
 //Modal components
 import ITHelpdesk from "./Modals/ITHelpdesk"
+import ITConsultancy from "./Modals/ITConsultancy"
+import WebDesign from "./Modals/WebDesign"
 
 
 export default class AboutScreen extends Component {
@@ -80,7 +82,7 @@ export default class AboutScreen extends Component {
                             <Text style={styles.btnText}> IT CONSULTANCY </Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.modalBtns}
-                            onPress={() => this.setModalVisible(!this.state.modalVisible, "webDesign")}
+                            onPress={() => this.setModalVisible(!this.state.modalVisible, "WebDesign")}
                         >
                             <Text style={styles.btnText}> WEB DESIGN </Text>
                         </TouchableOpacity>
@@ -97,6 +99,8 @@ export default class AboutScreen extends Component {
                             alignItems: 'center'
                         }}>
                             {this.state.modalType === "ITHelpdesk" ? <ITHelpdesk /> : null}
+                            {this.state.modalType === "ITConsultancy" ? <ITConsultancy /> : null}
+                            {this.state.modalType === "WebDesign" ? <WebDesign /> : null}
 
                             <TouchableOpacity style={styles.modalBtns}
                                 onPress={() => this.setModalVisible(!this.state.modalVisible)}>
