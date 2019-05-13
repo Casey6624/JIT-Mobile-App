@@ -86,11 +86,16 @@ class HomeScreen extends Component {
                     </Animated.View>
 
                     <Animated.View style={{
-                        justifyContent: "flex-start",
                         marginTop: 10,
-                        alignItems: "center",
                         fontFamily: Fonts.RobotoLight,
-                        borderRadius: 10, textAlign: "center", padding: 5, backgroundColor: "#2A2F33", opacity: this.state.showAnim, transform: [
+                        borderRadius: 5,
+                        textAlign: "center",
+                        backgroundColor: "#2A2F33",
+                        opacity: this.state.showAnim,
+                        width: 320,
+                        padding: 5,
+                        justifyContent: "space-between",
+                        transform: [
                             {
                                 translateX: this.state.showAnim.interpolate({
                                     inputRange: [0, 1],
@@ -113,15 +118,20 @@ class HomeScreen extends Component {
                     </Animated.View>
 
                     <Animated.View style={{
-                        justifyContent: "flex-start",
+                        justifyContent: "space-between",
                         marginTop: 10,
-                        alignItems: "center",
                         fontFamily: Fonts.RobotoLight,
-                        borderRadius: 10, textAlign: "center", padding: 5, backgroundColor: "#2A2F33", opacity: this.state.showAnim, transform: [
+                        borderRadius: 5,
+                        textAlign: "center",
+                        backgroundColor: "#2A2F33",
+                        opacity: this.state.showAnim,
+                        width: 320,
+                        padding: 5,
+                        opacity: this.state.showAnim, transform: [
                             {
                                 translateX: this.state.showAnim.interpolate({
                                     inputRange: [0, 1],
-                                    outputRange: [30, 1]
+                                    outputRange: [20, 1]
                                 })
                             },
                             {
@@ -133,7 +143,7 @@ class HomeScreen extends Component {
                         ]
                     }}>
                         {this.state.numOfCustomers && <Text style={styles.LMIText}>
-                            <IconFontAwesome name="bar-chart" size={25} style={{ color: "#ef7d00" }} /> <Text style={{ fontFamily: Fonts.RobotoBold }}> 4.96 / 5 </Text> Satisfaction Rate
+                            <IconFontAwesome name="bar-chart" size={25} style={{ color: "#ef7d00" }} /> <Text style={{ fontFamily: Fonts.RobotoBold }}> 4.96 </Text>/ <Text style={{ fontFamily: Fonts.RobotoBold }}>5</Text> Satisfaction Rate
                             </Text>}
                     </Animated.View>
 
@@ -142,6 +152,56 @@ class HomeScreen extends Component {
         );
     }
 } //<ion-icon name="help-buoy"></ion-icon>
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: "#ef7d00",
+        flex: 1
+    },
+    contentContainer: {
+        margin: 25
+    },
+    headerText: {
+        backgroundColor: "#ef7d00",
+        padding: 10,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        elevation: 2
+    },
+    homeTitle: {
+        color: "white",
+        fontSize: 35,
+        marginTop: 10,
+        textAlign: "center",
+        fontFamily: Fonts.RobotoLight
+    },
+    headerAccent: {
+        color: "black"
+    },
+    tchButton: {
+        alignItems: "center",
+        backgroundColor: '#ef7d00',
+        padding: 12,
+        borderRadius: 5,
+        width: 200
+    },
+    welcomeText: {
+        color: "white",
+        fontSize: 28,
+        fontWeight: "bold",
+        margin: 15,
+        fontFamily: Fonts.RobotoLight,
+        fontWeight: "400"
+    },
+    LMIText: {
+        color: "white",
+        fontSize: 22,
+        fontFamily: Fonts.RobotoLight,
+        padding: 0,
+        margin: 0
+    }
+})
 
 export default createBottomTabNavigator({
     Home: {
@@ -189,53 +249,3 @@ export default createBottomTabNavigator({
             allowFontScaling: true
         }
     })
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "#ef7d00",
-        flex: 1
-    },
-    contentContainer: {
-        margin: 25
-    },
-    headerText: {
-        backgroundColor: "#ef7d00",
-        padding: 10,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        elevation: 2
-    },
-    homeTitle: {
-        color: "white",
-        fontSize: 35,
-        marginTop: 10,
-        textAlign: "center",
-        fontFamily: Fonts.RobotoLight
-    },
-    headerAccent: {
-        color: "black"
-    },
-    tchButton: {
-        alignItems: "center",
-        backgroundColor: '#ef7d00',
-        padding: 12,
-        borderRadius: 5,
-        width: 200
-    },
-    welcomeText: {
-        color: "white",
-        fontSize: 28,
-        fontWeight: "bold",
-        margin: 15,
-        fontFamily: Fonts.RobotoLight,
-        fontWeight: "400"
-    },
-    LMIText: {
-        color: "white",
-        fontSize: 22,
-        fontFamily: Fonts.RobotoLight,
-        justifyContent: "flex-start",
-        flexDirection: "row"
-    }
-})

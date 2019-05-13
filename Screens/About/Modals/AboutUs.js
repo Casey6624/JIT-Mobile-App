@@ -65,18 +65,15 @@ class AboutUs extends Component {
                     />
                 </View>
                 <Video
-                    ref={(ref) => {
-                        this.player = ref
-                    }}
+                    ref={(ref) => this.player = ref}
                     style={{
-                        flex: 1,
+                        flex: 1
                     }}
                     source={require("../../../assets/mp4/jollyvid.mp4")}
                     resizeMode="contain"
                     muted={this.state.isMuted}
                     paused={this.state.isPaused}
                     onTouchStart={() => this.changeMutedState(!this.state.isMuted)}
-                    posterResizeMode="contain"
                     controls={true}
                 />
             </View>

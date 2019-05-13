@@ -82,6 +82,7 @@ export default class NewsScreen extends Component {
                         flex: 1,
                         flexDirection: 'row',
                         justifyContent: 'center',
+                        margin: 15,
                         // Animations
                         opacity: this.state.spinAnimVal, transform: [
                             {
