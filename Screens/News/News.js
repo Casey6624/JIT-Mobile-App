@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, Linking, ScrollView, Animated, Easing } from "react-native";
 
 import Icon from "react-native-vector-icons/Ionicons";
+import IconFA5 from "react-native-vector-icons/FontAwesome5"
 import NoImage from "../../assets/img/noImage.jpg"
 
 import axios from "axios"
@@ -34,21 +35,9 @@ export default class NewsScreen extends Component {
                 useNativeDriver: true,
             })
         ])).start()
-        axios.get(queryURL)
+        axios.get(queryURL, { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json; charset=UTF-8' } })
             .then(res => {
                 this.setState({ blogData: res.data, pullingBlogsInProgress: false })
-                Animated.loop(Animated.sequence([
-                    Animated.timing(this.state.spinAnimVal, {
-                        toValue: 1,
-                        duration: 3000,
-                        useNativeDriver: true,
-                    }),
-                    Animated.timing(this.state.spinAnimVal, {
-                        toValue: 1,
-                        duration: 2000,
-                        useNativeDriver: true,
-                    })
-                ])).stop()
             })
             .catch(err => {
                 this.setState({
@@ -79,23 +68,24 @@ export default class NewsScreen extends Component {
 
         if (this.state.pullingBlogsInProgress) {
             return (
-                <ScrollView style={styles.container} contentContainerStyle={{
+                <View style={{
                     backgroundColor: "#2A2F33",
-                    flex: 1,
-                    alignContent: "center"
+                    flex: 1
                 }}>
                     <View style={styles.headerText}>
                         <Text style={styles.welcomeText}>JOLLY IT</Text>
-                        <Icon name="md-paper" size={35} style={{ color: "#2A2F33" }} />
+                        <Icon name="md-paper" size={35} style={{
+                            color: "#2A2F33"
+                        }} />
                     </View>
                     <Animated.View style={{
                         flex: 1,
-                        justifyContent: "center",
-                        textAlign: "center",
+                        flexDirection: 'row',
+                        justifyContent: 'center',
                         // Animations
                         opacity: this.state.spinAnimVal, transform: [
                             {
-                                rotateX: this.state.spinAnimVal.interpolate({
+                                rotateY: this.state.spinAnimVal.interpolate({
                                     inputRange: [0, 1],
                                     outputRange: ['0deg', '720deg']
                                 })
@@ -110,9 +100,9 @@ export default class NewsScreen extends Component {
                             flex: 1,
                             alignContent: "center"
                         }}>
-                        <Icon name="md-aperture" size={100} style={{ color: "#ef7d00" }} />
+                        <IconFA5 name="robot" size={100} style={{ color: "#ef7d00" }} />
                     </Animated.View>
-                </ScrollView >
+                </View >
             )
         }
 
@@ -125,10 +115,13 @@ export default class NewsScreen extends Component {
                     </View>
                     <View style={styles.innerContainer}>
                         <Text style={{
-                            fontSize: 48,
+                            fontSize: 32,
                             color: "white",
 
                         }}> 😢 Oops! Could not pull blog information at this time. Please try again later. </Text>
+                        <TouchableOpacity style={styles.viewMoreBtn} onPress={() => this.getPosts()}>
+                            <Text style={styles.viewMoreBtnTxt}> Tap To Retry</Text>
+                        </TouchableOpacity>
                     </View>
                 </ScrollView>
             )
