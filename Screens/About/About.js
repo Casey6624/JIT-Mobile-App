@@ -75,7 +75,7 @@ export default class AboutScreen extends Component {
                         <TouchableOpacity style={styles.modalBtns}
                             onPress={() => this.setModalVisible(!this.state.modalVisible, "AboutUs")}
                         >
-                            <Text style={styles.btnText}> ABOUT US </Text>
+                            <Text style={styles.btnText}> ABOUT JOLLY IT </Text>
                         </TouchableOpacity>
                         <Text style={{
                             fontSize: 24,

@@ -231,19 +231,11 @@ const styles = StyleSheet.create({
         fontFamily: Fonts.RobotoLight,
         fontWeight: "400"
     },
-    lmiContainer: {
-        flexDirection: "row",
-        flex: 1,
-        marginTop: 48,
-        textAlign: "left",
-        backgroundColor: "#2A2F33",
-        justifyContent: "flex-start",
-        borderRadius: 10
-    },
     LMIText: {
         color: "white",
         fontSize: 22,
         fontFamily: Fonts.RobotoLight,
-        justifyContent: "flex-start"
+        justifyContent: "flex-start",
+        flexDirection: "row"
     }
 })
