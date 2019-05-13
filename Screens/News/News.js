@@ -18,21 +18,42 @@ export default class NewsScreen extends Component {
 
     componentDidMount() {
         this.getPosts();
-        Animated.timing(this.state.spinAnimVal, {
-            toValue: 1,
-            duration: 3000,
-            easing: Easing.linear,
-            useNativeDriver: true,
-        }).start()
     }
 
     getPosts = () => {
         let queryURL = "https://www.jollyit.co.uk/wp-json/wp/v2/posts?_embed"
+        Animated.loop(Animated.sequence([
+            Animated.timing(this.state.spinAnimVal, {
+                toValue: 1,
+                duration: 3000,
+                useNativeDriver: true,
+            }),
+            Animated.timing(this.state.spinAnimVal, {
+                toValue: 1,
+                duration: 2000,
+                useNativeDriver: true,
+            })
+        ])).start()
         axios.get(queryURL)
             .then(res => {
-                this.setState({ blogData: res.data })
+                this.setState({ blogData: res.data, pullingBlogsInProgress: false })
+                Animated.loop(Animated.sequence([
+                    Animated.timing(this.state.spinAnimVal, {
+                        toValue: 1,
+                        duration: 3000,
+                        useNativeDriver: true,
+                    }),
+                    Animated.timing(this.state.spinAnimVal, {
+                        toValue: 1,
+                        duration: 2000,
+                        useNativeDriver: true,
+                    })
+                ])).stop()
             })
             .catch(err => {
+                this.setState({
+                    pullingBlogsInProgress: false
+                })
                 console.log(err)
             })
     }
@@ -56,30 +77,57 @@ export default class NewsScreen extends Component {
 
     render() {
 
-        return (
-            <ScrollView style={styles.container}>
-                <View style={styles.headerText}>
-                    <Text style={styles.welcomeText}>JOLLY IT</Text>
-                    <Icon name="ios-paper" size={35} style={{ color: "#2A2F33" }} />
-                </View>
-                <Animated.View style={{
+        if (this.state.pullingBlogsInProgress) {
+            return (
+                <ScrollView style={styles.container} contentContainerStyle={{
+                    backgroundColor: "#2A2F33",
                     flex: 1,
-                    justifyContent: "center",
-                    alignSelf: "center",
-                    // Animations
-                    opacity: this.state.spinAnimVal, transform: [
-                        {
-                            rotateX: this.state.spinAnimVal.interpolate({
-                                inputRange: [0, 1],
-                                outputRange: ['0deg', '360deg']
-                            })
-                        }
-                    ]
+                    alignContent: "center"
                 }}>
-                    <Icon name="ios-aperture" size={100} style={{ color: "#ef7d00" }} />
-                </Animated.View>
-            </ScrollView>
-        )
+                    <View style={styles.headerText}>
+                        <Text style={styles.welcomeText}>JOLLY IT</Text>
+                        <Icon name="ios-paper" size={35} style={{ color: "#2A2F33" }} />
+                    </View>
+                    <Animated.View style={{
+                        flex: 1,
+                        justifyContent: "center",
+                        // Animations
+                        opacity: this.state.spinAnimVal, transform: [
+                            {
+                                rotateY: this.state.spinAnimVal.interpolate({
+                                    inputRange: [0, 1],
+                                    outputRange: ['0deg', '360deg']
+                                })
+                            }
+                        ]
+                    }}
+                        contentContainerStyle={{
+                            alignContent: "center",
+                            alignSelf: "center",
+                            alignItems: "center",
+                            backgroundColor: "#2A2F33",
+                            flex: 1,
+                            alignContent: "center"
+                        }}>
+                        <Icon name="ios-aperture" size={100} style={{ color: "#ef7d00" }} />
+                    </Animated.View>
+                </ScrollView>
+            )
+        }
+
+        if (!this.state.pullingBlogsInProgress && this.state.blogData.length === 0) {
+            return (
+                <ScrollView style={styles.spinnerContainer}>
+                    <View style={styles.headerText}>
+                        <Text style={styles.welcomeText}>JOLLY IT</Text>
+                        <Icon name="ios-paper" size={35} style={{ color: "#2A2F33" }} />
+                    </View>
+                    <View style={styles.innerContainer}>
+                        <Text> Oops! Could not pull blog information at this time. Please try again later. </Text>
+                    </View>
+                </ScrollView>
+            )
+        }
 
         return (
             <ScrollView style={styles.container}>
@@ -156,6 +204,10 @@ const styles = StyleSheet.create({
         flex: 1,
         alignContent: "center"
     },
+    spinnerContainer: {
+        backgroundColor: "#2A2F33",
+        flex: 1
+    },
     innerContainer: {
         padding: 10
     },
@@ -164,7 +216,8 @@ const styles = StyleSheet.create({
         padding: 10,
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        width: "auto"
     },
     welcomeText: {
         color: "white",
@@ -194,6 +247,8 @@ const styles = StyleSheet.create({
         fontSize: 22,
         paddingTop: 10,
         fontFamily: Fonts.RobotoLight,
+        marginTop: 5,
+        marginBottom: 5
     },
     viewMoreBtn: {
         backgroundColor: "#ef7d00",

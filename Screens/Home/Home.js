@@ -118,7 +118,7 @@ export default createBottomTabNavigator({
         navigationOptions: {
             tabBarLabel: "Home",
             tabBarIcon: () => (
-                <Icon name="ios-home" size={24} />
+                <Icon name="md-home" size={24} />
             )
         }
     },
@@ -127,16 +127,16 @@ export default createBottomTabNavigator({
         navigationOptions: {
             tabBarLabel: "News",
             tabBarIcon: () => (
-                <Icon name="ios-paper" size={24} />
+                <Icon name="md-paper" size={24} />
             )
         }
     },
     About: {
         screen: AboutScreen,
         navigationOptions: {
-            tabBarLabel: "About Us",
+            tabBarLabel: "About",
             tabBarIcon: () => (
-                <Icon name="ios-people" size={28} />
+                <Icon name="md-people" size={28} />
             )
         }
     },
@@ -145,7 +145,7 @@ export default createBottomTabNavigator({
         navigationOptions: {
             tabBarLabel: "Settings",
             tabBarIcon: () => (
-                <Icon name="ios-hammer" size={24} />
+                <Icon name="md-cog" size={24} />
             ),
             header: null,
             headerLeft: null
