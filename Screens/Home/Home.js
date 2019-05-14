@@ -1,6 +1,6 @@
 // Libaries
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Animated, ImageBackground, TouchableOpacity, Easing } from 'react-native';
+import { StyleSheet, Text, View, Image, Animated, ImageBackground, TouchableOpacity, Easing, Linking } from 'react-native';
 import { TabNavigator, TabBarBottom, createBottomTabNavigator } from "react-navigation";
 import axios from "axios"
 // Utils 
@@ -84,7 +84,31 @@ class HomeScreen extends Component {
                             ...a family run IT consultancy based in London 💂 + Yorkshire ☕.
                         </Text>
                     </Animated.View>
-
+                    <Animated.View style={{
+                        flexDirection: "row",
+                        justifyContent: "space-around",
+                        margin: 12,
+                        transform: [
+                            {
+                                scale: this.state.showAnim.interpolate({
+                                    inputRange: [0, 1],
+                                    outputRange: [2, 1]
+                                })
+                            }
+                        ]
+                    }}>
+                        <Icon name="logo-twitter" size={36} style={{ color: "#ef7d00" }}
+                            onPress={() => Linking.openURL("https://twitter.com/jollyit")}
+                        />
+                        <Icon name="logo-facebook" size={36} style={{ color: "#ef7d00" }}
+                            onPress={() => Linking.openURL("https://www.facebook.com/JollyIT")}
+                        />
+                        <Icon name="logo-linkedin" size={36} style={{ color: "#ef7d00" }}
+                            onPress={() => Linking.openURL("https://www.linkedin.com/company/jolly-it-solutions-ltd")}
+                        />
+                        <Icon name="logo-youtube" size={36} style={{ color: "#ef7d00" }}
+                            onPress={() => Linking.openURL("https://www.youtube.com/channel/UCAX1Fq1g7mQv82ZQ0vO-84A")} />
+                    </Animated.View>
                     <Animated.View style={{
                         marginTop: 10,
                         fontFamily: Fonts.RobotoLight,
@@ -111,7 +135,7 @@ class HomeScreen extends Component {
                         ]
                     }}>
                         {this.state.numOfCustomers && <Text style={styles.LMIText}>
-                            <IconFontAwesome name="support" size={25} style={{ color: "#ef7d00" }} /> Currently Helping
+                            <IconFontAwesome name="support" size={25} style={{ color: "#ef7d00" }} />  Currently Helping
                             <Text style={{ color: "#ef7d00", fontFamily: Fonts.OpenSansConBold }}> {this.state.numOfCustomers} </Text>
                             Customers
                             </Text>}
@@ -143,10 +167,9 @@ class HomeScreen extends Component {
                         ]
                     }}>
                         {this.state.numOfCustomers && <Text style={styles.LMIText}>
-                            <IconFontAwesome name="bar-chart" size={25} style={{ color: "#ef7d00" }} /> <Text style={{ fontFamily: Fonts.RobotoBold }}> 4.96 </Text>/ <Text style={{ fontFamily: Fonts.RobotoBold }}>5</Text> Satisfaction Rate
+                            <IconFontAwesome name="bar-chart" size={25} style={{ color: "#ef7d00" }} /> 4.96 / <Text style={{ fontFamily: Fonts.RobotoBold, color: "#ef7d00" }}>5</Text> Satisfaction Rate
                             </Text>}
                     </Animated.View>
-
                 </View>
             </ImageBackground >
         );

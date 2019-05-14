@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Switch, TextInput, TouchableOpacity, Image, AsyncStorage } from 'react-native';
+import { Text, View, StyleSheet, Switch, TextInput, TouchableOpacity, Image, AsyncStorage, ScrollView } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons"
 import axios from "axios"
 import JollyTeam from "../../assets/img/jollyTeam.jpg"
