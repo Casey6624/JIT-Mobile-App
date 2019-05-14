@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Switch, TextInput, TouchableOpacity, Image } from 'react-native';
+import { Text, View, StyleSheet, Switch, TextInput, TouchableOpacity, Image, AsyncStorage } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons"
 import axios from "axios"
 import JollyTeam from "../../assets/img/jollyTeam.jpg"
@@ -17,6 +17,11 @@ export default class SettingsScreen extends Component {
         currEmailIcon: null
     }
 
+    componentDidMount() {
+        this.getPushNot()
+        this.getNewsletter()
+    }
+
     setShowNewsletter = (value) => {
         let newVal = !this.state.showNewsletter
         if (newVal === false) {
@@ -28,12 +33,45 @@ export default class SettingsScreen extends Component {
 
     setPushNot = value => {
         let newVal = !this.state.allowPushNot
-        this.setState({ allowPushNot: newVal })
+        this.setState({ allowPushNot: newVal }, () => AsyncStorage.setItem("enablePushNot", `${newVal}`))
     }
 
     setUglyMugs = value => {
         let newVal = !this.state.showUglyMugs
-        this.setState({ showUglyMugs: newVal })
+        this.setState({ showUglyMugs: value })
+    }
+
+    getPushNot = async () => {
+        try {
+            let pushNot = await AsyncStorage.getItem("enablePushNot")
+            if (pushNot === "true") {
+                this.setState({ allowPushNot: true })
+            } else if (pushNot === "false") {
+                this.setState({ allowPushNot: false })
+            } else {
+                this.setPushNot({ allowPushNot: false })
+            }
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+
+    getNewsletter = async () => {
+        try {
+            let emailAddress = await AsyncStorage.getItem("emailAddress")
+            if (emailAddress !== "") {
+                this.setState({ emailAddress: emailAddress })
+            }
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+
+    saveNewsletter = emailAddress => {
+        console.log("email passed" + emailAddress)
+        AsyncStorage.setItem("emailAddress", emailAddress)
     }
 
     submitEmailAddress = () => {
@@ -46,7 +84,9 @@ export default class SettingsScreen extends Component {
             emailAddress: this.state.emailAddress
         })
             .then(res => {
-                this.setState({ emailError: "Success! You are now signed up.", currEmailIcon: this.state.emailIcons[1] })
+                this.setState({ emailError: "Success! You are now signed up.", currEmailIcon: this.state.emailIcons[1] }, () => {
+                    this.saveNewsletter(this.state.emailAddress)
+                })
             })
             .catch(err => {
                 this.setState({ emailError: "Oops! There was an issue signing you up. Please try again later.", currEmailIcon: this.state.emailIcons[0] })
@@ -81,6 +121,7 @@ export default class SettingsScreen extends Component {
                 </View>
                 {this.state.showNewsletter && <View style={styles.inputAndSubmit}>
                     <TextInput
+                        value={this.state.emailAddress}
                         style={styles.emailAddress}
                         placeholder="Email Address"
                         onChangeText={(text) => this.setState({ emailAddress: text })}
@@ -128,7 +169,8 @@ const styles = StyleSheet.create({
     },
     helperText: {
         fontSize: 20,
-        color: "white"
+        color: "white",
+        fontFamily: Fonts.RobotoLight
     },
     settingsOption: {
         flexDirection: "row",
