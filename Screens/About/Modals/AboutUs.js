@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import Fonts from "../../../utils/fonts"
 import SquareLogo from "../../../assets/img/jollyIcon.png"
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, Linking } from "react-native"
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, Linking, Dimensions } from "react-native"
 // Icons
 import IconEncrypto from "react-native-vector-icons/Entypo";
 import IconFA from "react-native-vector-icons/FontAwesome";
@@ -14,10 +14,15 @@ class AboutUs extends Component {
 
     constructor(props) {
         super(props)
+        Dimensions.addEventListener("change", (dims) => {
+            console.log(dims.window.width)
+            this.setState({ screenWidth: dims.window.width })
+        })
 
         this.state = {
             isMuted: true,
-            isPaused: false
+            isPaused: false,
+            screenWidth: null
         }
     }
 
@@ -34,13 +39,18 @@ class AboutUs extends Component {
         this.player.seek(0)
     }
 
+    toggleFullScreen = () => {
+
+    }
+
     render() {
+
         return (
             <View style={styles.container}>
-                <Text style={styles.ModalTitle}> ABOUT US <Image source={SquareLogo} /> </Text>
-                <View style={styles.mainContent}>
+                {this.state.screenWidth > 500 ? null : <Text style={styles.ModalTitle}> ABOUT US <Image source={SquareLogo} /></Text>}
+                {this.state.screenWidth > 500 ? null : <View style={styles.mainContent}>
                     <Text style={styles.tagLine}>From a <Text style={{ color: "#ef7d00" }}>Tom Jolly</Text> founded, one man band, to a fully functioning IT organization spanning multiple offices across the UK 🇬🇧. We are proud of our history.</Text>
-                </View>
+                </View>}
                 <View style={{
                     flexDirection: "row",
                     justifyContent: "space-around"
@@ -66,9 +76,7 @@ class AboutUs extends Component {
                 </View>
                 <Video
                     ref={(ref) => this.player = ref}
-                    style={{
-                        flex: 1
-                    }}
+                    style={styles.videoFS}
                     source={require("../../../assets/mp4/jollyvid.mp4")}
                     resizeMode="contain"
                     muted={this.state.isMuted}
@@ -87,7 +95,16 @@ const styles = StyleSheet.create({
     },
     mainContent: {
         margin: 10,
+        flex: 1,
+        width: Dimensions.get("window").width - 20
+    },
+    video: {
         flex: 1
+    },
+    videoFS: {
+        flex: 1,
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height
     },
     ul: {
         marginLeft: 25,

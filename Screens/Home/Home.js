@@ -45,7 +45,7 @@ class HomeScreen extends Component {
     animateBoxes = () => {
         Animated.timing(this.state.showAnim, {
             toValue: 1,
-            duration: 500,
+            duration: 600,
             useNativeDriver: true
         }).start()
     }
@@ -92,7 +92,7 @@ class HomeScreen extends Component {
                             {
                                 scale: this.state.showAnim.interpolate({
                                     inputRange: [0, 1],
-                                    outputRange: [2, 1]
+                                    outputRange: [20, 1]
                                 })
                             }
                         ]
