@@ -39,10 +39,6 @@ class AboutUs extends Component {
         this.player.seek(0)
     }
 
-    toggleFullScreen = () => {
-
-    }
-
     render() {
 
         return (
