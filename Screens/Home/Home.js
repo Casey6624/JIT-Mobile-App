@@ -1,6 +1,6 @@
 // Libaries
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Animated, ImageBackground, TouchableOpacity, Easing, Linking } from 'react-native';
+import { StyleSheet, Text, View, Image, Animated, ImageBackground, TouchableOpacity, Easing, Linking, Dimensions } from 'react-native';
 import { TabNavigator, TabBarBottom, createBottomTabNavigator } from "react-navigation";
 import axios from "axios"
 // Utils 
