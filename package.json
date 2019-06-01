@@ -14,12 +14,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "moment": "^2.24.0",
-    "react": "16.6.0-alpha.8af6728",
-    "react-native": "0.57.3",
+    "react": "^16.8.3",
+    "react-native": "^0.59.0",
     "react-native-vector-icons": "^6.0.2",
-    "react-native-video": "^4.4.1",
-    "react-navigation": "^2.18.3",
-    "react-spring": "^8.0.20"
+    "react-navigation": "^2.18.3"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
