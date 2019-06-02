@@ -9,6 +9,7 @@ import ITHelpdesk from "./Modals/ITHelpdesk"
 import ITConsultancy from "./Modals/ITConsultancy"
 import WebDesign from "./Modals/WebDesign"
 import AboutUs from "./Modals/AboutUs"
+import VirtualITDirector from "./Modals/VirtualITDirector"
 
 
 export default class AboutScreen extends Component {
@@ -98,6 +99,11 @@ export default class AboutScreen extends Component {
                         >
                             <Text style={styles.btnText}> WEB DESIGN </Text>
                         </TouchableOpacity>
+                        <TouchableOpacity style={styles.modalBtns}
+                            onPress={() => this.setModalVisible(!this.state.modalVisible, "VirtualITDirector")}
+                        >
+                            <Text style={styles.btnText}> VIRTUAL IT DIRECTOR </Text>
+                        </TouchableOpacity>
                     </View>
                     <Modal
                         animationType="slide"
@@ -114,6 +120,7 @@ export default class AboutScreen extends Component {
                             {this.state.modalType === "ITConsultancy" ? <ITConsultancy /> : null}
                             {this.state.modalType === "WebDesign" ? <WebDesign /> : null}
                             {this.state.modalType === "AboutUs" ? <AboutUs /> : null}
+                            {this.state.modalType === "VirtualITDirector" ? <VirtualITDirector /> : null}
 
                             <TouchableOpacity style={styles.modalBtns}
                                 onPress={() => this.setModalVisible(!this.state.modalVisible)}>
@@ -176,6 +183,7 @@ const styles = StyleSheet.create({
     btnText: {
         fontFamily: Fonts.RobotoBold,
         color: "white",
-        fontSize: 16
+        fontSize: 16,
+        textAlign: "center"
     }
 })

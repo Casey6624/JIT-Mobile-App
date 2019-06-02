@@ -31,6 +31,8 @@ function HomeScreen(props) {
 
     useEffect(() => {
         fetchSessions()
+        console.log(Dimensions.get("window").height)
+        console.log(Dimensions.get("window").width)
     }, [])
 
     function fetchSessions() {
@@ -47,6 +49,7 @@ function HomeScreen(props) {
                 }
             })
             .catch(err => {
+                if (numOfCustomers !== null) return
                 console.log(err)
                 noData(true)
             })
@@ -235,10 +238,12 @@ const styles = StyleSheet.create({
     },
     LMIText: {
         color: "white",
-        fontSize: 22,
+        fontSize: Dimensions.get("window").width > 400 ? 52 : 22,
         fontFamily: Fonts.RobotoLight,
         padding: 0,
-        margin: 0
+        margin: 0,
+        justifyContent: "center",
+        display: "flex"
     }
 })
 
