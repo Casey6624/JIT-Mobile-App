@@ -8,7 +8,7 @@ import IconFA from "react-native-vector-icons/FontAwesome";
 import IconMCI from "react-native-vector-icons/MaterialCommunityIcons"
 import IconIonicon from "react-native-vector-icons/Ionicons"
 // External Components
-
+import Video from "react-native-video"
 
 class AboutUs extends Component {
 
@@ -39,11 +39,51 @@ class AboutUs extends Component {
         this.player.seek(0)
     }
 
+    toggleFullScreen = () => {
+
+    }
+
     render() {
 
         return (
             <View style={styles.container}>
-                <Text> About Us </Text>
+                {this.state.screenWidth > 500 ? null : <Text style={styles.ModalTitle}> ABOUT US <Image source={SquareLogo} /></Text>}
+                {this.state.screenWidth > 500 ? null : <View style={styles.mainContent}>
+                    <Text style={styles.tagLine}>From a <Text style={{ color: "#ef7d00" }}>Tom Jolly</Text> founded, one man band, to a fully functioning IT organization spanning multiple offices across the UK 🇬🇧. We are proud of our history.</Text>
+                </View>}
+                <View style={{
+                    flexDirection: "row",
+                    justifyContent: "space-around"
+                }}>
+                    <IconIonicon
+                        name="md-rewind"
+                        size={28}
+                        style={{ color: "#ef7d00" }}
+                        onPress={() => this.rewindVideo()}
+                    />
+                    <IconIonicon
+                        name={this.state.isPaused ? "md-play" : "md-pause"}
+                        size={28}
+                        style={{ color: "#ef7d00" }}
+                        onPress={() => this.changePlayingState(!this.state.isPaused)}
+                    />
+                    <IconIonicon
+                        name={this.state.isMuted ? "ios-volume-mute" : "md-volume-high"}
+                        size={28}
+                        style={{ color: "#ef7d00" }}
+                        onPress={() => this.changeMutedState(!this.state.isMuted)}
+                    />
+                </View>
+                <Video
+                    ref={(ref) => this.player = ref}
+                    style={styles.videoFS}
+                    source={require("../../../assets/mp4/jollyvid.mp4")}
+                    resizeMode="contain"
+                    muted={this.state.isMuted}
+                    paused={this.state.isPaused}
+                    onTouchStart={() => this.changeMutedState(!this.state.isMuted)}
+                    controls={true}
+                />
             </View>
         )
     }

@@ -94,15 +94,16 @@ export default class AboutScreen extends Component {
                         >
                             <Text style={styles.btnText}> IT CONSULTANCY </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.modalBtns}
-                            onPress={() => this.setModalVisible(!this.state.modalVisible, "WebDesign")}
-                        >
-                            <Text style={styles.btnText}> WEB DESIGN </Text>
-                        </TouchableOpacity>
+        
                         <TouchableOpacity style={styles.modalBtns}
                             onPress={() => this.setModalVisible(!this.state.modalVisible, "VirtualITDirector")}
                         >
                             <Text style={styles.btnText}> VIRTUAL IT DIRECTOR </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.modalBtns}
+                            onPress={() => this.setModalVisible(!this.state.modalVisible, "WebDesign")}
+                        >
+                            <Text style={styles.btnText}> WEB DESIGN </Text>
                         </TouchableOpacity>
                     </View>
                     <Modal
